@@ -12,7 +12,7 @@
 
 /* solution 1: hash map + one pointer  
    maintain a hashMap to keep track of index of nums[i] by <nums[i], index[i]> 	
-   a pointer interate through the array to find if -nums[i] exists in hash map
+   a pointer iterate through the array to find if -nums[i] exists in hash map
    T(n) = O(n), S(n) = O(n)   
 */ 
 public class TwoSum {
