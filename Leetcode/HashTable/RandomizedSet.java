@@ -40,12 +40,13 @@ O(1)的插入删除明显考虑用hash set或map，set存没法getRandom，则�
 
 
 public class RandomizedSet {
-	private List<Integer> val;
+
+	private List<Integer> vals;
 	private Map<Integer, Integer> valToIdx;
 
     /** Initialize your data structure here. */
     public RandomizedSet() {
-        val = new ArrayList<Integer>();
+        vals = new ArrayList<Integer>();
 		valToIdx = new HashMap<Integer, Integer>();
     }
     
@@ -56,7 +57,7 @@ public class RandomizedSet {
 		}
 		else {
 			valToIdx.put(val, valToIdx.size());
-			val.add(val);
+			vals.add(val);
 			return true;
 		}
     }
@@ -69,12 +70,12 @@ public class RandomizedSet {
 		else {
 			// V =HashMap.remove(K)
 			int idx = valToIdx.remove(val);
-			if (idx < val.size() - 1) {    // if it's not the last item
+			if (idx < vals.size() - 1) {    // if it's not the last item
 				// put the last item on the index of removed item 
-				val.set(idx, val.get(val.size()-1);
-				valToIdx.put(val.get(val.size()-1), idx);
+				vals.set(idx, vals.get(vals.size()-1));
+				valToIdx.put(vals.get(vals.size()-1), idx);
 			}
-			val.remove(val.size()-1);
+			vals.remove(vals.size()-1);
 			return true;
 		}
     }
@@ -82,7 +83,7 @@ public class RandomizedSet {
     /** Get a random element from the set. */
     public int getRandom() {
         Random rdm = new Random();
-		return val.get(rdm.nextInt(val.size()));
+		return vals.get(rdm.nextInt(vals.size()));
     }
 }
 
