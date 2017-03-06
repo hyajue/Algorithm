@@ -8,12 +8,40 @@
 * Given the list [1,[4,[6]]], return 17. (one 1 at depth 3, one 4 at depth 2, and one 6 at depth 1; 1*3 + 4*2 + 6*1 = 17)
 */
 
+/*
+solution 1:
+先检查最大深度，再计算
+*/
+
 public class NestedListWeightSumII {
 	public int depthSumInverse(List<NestedInteger> nestedList) {
 		if (nestedList == null || nestedList.size() == 0) return 0;
-		int maxLevel = getMaxLevel 
+		int maxLevel = getMaxLevel(nestedList, 1);
+			
+	}
+	private int getMaxDepth(List<NestedInteger> nestedList, int depth) {
+		int max = depth;
+		for (NestedInteger item : nestedList) {
+			if (!item.isInteger()) {
+				max = Math.max(max, getMaxDepth(item.getList(), depth+1));
+			}
+		}
+		return max;
+	}
+	private int sum(List<NestedInteger> nestedList, int depth) {
+		int sum = 0;
+		for (NestedInteger item : nestedList) {
+			if (item.isInteger()) {
+				sum += item.getInteger() * depth;
+			} else {
+				sum += sum(item.getList(), depth-1);
+			}
+		}
+		return sum;
 	}
 }
+
+
 
 /** 
  * // This is the interface that allows for creating nested lists. 
