@@ -38,12 +38,18 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
 		for (int i = 0; i < inorder.length; i++) {
 			map.put(inorder[i], i);
 		}
+		TreeNode root = helper(preorder, 0, preorder.length-1, inorder, 0, inorder.length-1, map);
+		return root;
     }
 	private TreeNode helper(int[] preorder, int preL, int preR, int[] inorder, int inL, int inR, Map<Integer, Integer> map) {
 		if (preL > preR || inL > inR) {
 			return null;
 		} 
-		TreeNode root = new TreeNode()
+		TreeNode root = new TreeNode(preorder[preL]);
+		int idx = map.get(root.val);
+		root.left = helper(preorder, preL+1, preL+idx-inL, inorder, inL, idx-1, map);
+		root.right = helper(preorder, preL+idx-inL+1, preR, inorder, idx+1, inR, map);
+		return root;
 	}
 } 
 
