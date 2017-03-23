@@ -10,8 +10,13 @@ solution 1:
 复杂度：
 时间O(n) 空间O(n)
 由于乘法会出现负值 负负得正 所以需要记录最小的负值 
-*/
 
+下面举个例子帮助理解：
+	[1,  -1,   -2,   4]
+idx  0    1     2    3
+max  1    -1    
+min  1   -1    2 
+*/	 
 public class MaximumProductSubarray {
   public int maxProduct(int[] nums) {
     if (nums == null || nums.length == 0) {
@@ -60,19 +65,3 @@ public class MaximumProductSubarray {
 	return globalMax;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

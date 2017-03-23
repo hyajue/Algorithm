@@ -24,8 +24,7 @@
 时间 O(9!) 空间 O(9) 递归栈空间
 
 思路
-这题其实是II的简化版，设想一个[1,2,3,4,5,6,7,8,9]的数组，同样一个元素只能取一次，但是已经预先确定没有重复了。所以可以省去跳过重复元素的部分。
-不过，我们在递归的时候要加一个额外的变量k来控制递归的深度，一旦超过了预设深度，就停止该分支的搜索。本质上是有限深度优先搜索。
+II的简化版，设想一个[1,2,3,4,5,6,7,8,9]的数组，同样一个元素只能取一次，但是已经预先确定没有重复了。所以可以省去跳过重复元素的部分。
 
 两个无法得到正解的情况是：
 在k为0，而target不为0时，当然已经无法得到正解，return。
@@ -36,20 +35,19 @@ public class CombinationSumIII {
   public List<List<Integer>> combinationSum3(int k, int n) {
     List<List<Integer>> res = new ArrayList<List<Integer>>();
 	if (k == 0) return res;
-    List<Integer> tmp = new ArrayList<Integer>();
-    helper(k, n, 1, tmp, res);
+    List<Integer> curList = new ArrayList<Integer>();
+    helper(k, n, 1, curList, res);
     return res;    
   }
-  private void helper(int k, int target, int start, List<Integer> tmp, List<List<Integer>> res) {
+  private void helper(int k, int target, int start, List<Integer> curList, List<List<Integer>> res) {
 	if (target < 0 || k < 0) return;
 	else if (target == 0 && k == 0) {
-	  List<Integer> oneSet = new ArrayList<Integer>(tmp);
-	  res.add(oneSet);
+	  res.add(new ArrayList<Integer>(curList));
 	} else {
 	  for (int j = start; j <= 9; j++) {
-		tmp.add(j);
-		helper(k-1, target-j, j+1,tmp, res);
-		tmp.remove(tmp.size()-1);
+		curList.add(j);
+		helper(k-1, target-j, j+1,curList, res);
+		curList.remove(curList.size()-1);
 	  }
 	}
   }
