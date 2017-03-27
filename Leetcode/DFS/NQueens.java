@@ -75,7 +75,7 @@ public class NQueens {
   private boolean isValid(List<Integer> list) {
     int row = list.size() - 1;
     int col = list.get(row);
-    for (int i = 0; i < row - 1; i++) {
+    for (int i = 0; i <= row - 1; i++) {
 	  int otherRow = i;
 	  int otherCol = list.get(i);
 	  if (col == otherCol) return false;
