@@ -24,7 +24,7 @@ solution 1
 思路：递归 
 递归函数每次返回一个节点 该返回节点为当前调用节点的前一个节点
 边界条件：
-当调用节点本身或下一个节点为空时 极为原链表的末尾 将新头结点指向改节点即可
+当调用节点本身或下一个节点为空时 即为原链表的末尾 将新头结点指向改节点即可
 
 注意
 递归法在LC上无法AC 总是TLE 
@@ -40,10 +40,10 @@ public class ReverseLinkedList {
 		if (n == null || n.next == null) {
 			list.set(0,n);
 		} else {
-		  ListNode prev = helper(n.next);
-			prev.next = n;
+		  ListNode prev = helper(n.next); // 注意这里传入递归函数的是n.next 画个图更好理解
+			prev.next = n; //返回的prev是n节点在原顺序下的后续节点 
 		}
-		return n;
+		return n; //无论if还是else 都要返回该层的n给上一层
 	}
 } 
 
@@ -54,8 +54,7 @@ solution 2
 
 思路：双指针迭代
 每次调整指针1指针2的指向关系 一直到指针2指向null 指针1即为原链表尾节点->新表头
-注意最后要将原头节点head的next指向null 
- 
+注意最后要将原头节点head的next指向null
 */ 
  
 public class ReverseLinkedList {
@@ -73,4 +72,3 @@ public class ReverseLinkedList {
 		return ptr1;
 	}
 } 
-
