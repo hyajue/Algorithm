@@ -37,9 +37,9 @@ public class FrogJump {
 	  if (stones == null || stones.length == 0) return false;
 		if (stones[1] != 1) return false; //第一次只能跳一步
 		int len = stones.length;
-		int[][] canJump = new boolean[len][len];
+		int[][] canJump = new int[len][len];
 		for (int i = 0; i < len; i++) {
-			for (int j = 0; j < len; i++) {
+			for (int j = 0; j < len; j++) {
 				canJump[i][j] = -1;
 			}
 		}
@@ -48,24 +48,27 @@ public class FrogJump {
 	
 	private boolean jumpable(int[][] canJump, int[] stones, int i, int j, int length) {
 		if (canJump[i][j] != -1) return canJump[i][j] == 1;
-		if (i == len - 1) {
+		if (i == length - 1) {
 			canJump[i][j] = 1;
 			return true;
 		}
-		for (int k = i + 1; k < len; k++) {
+		for (int k = i + 1; k < length; k++) {
+			// 距离太近 
 			if (stones[k] < stones[i] + j - 1) {
 				continue;
+			//距离太远	
 			} else if (stones[k] > stones[i] + j + 1) {
-				canJump[i][j] = false;
+				canJump[i][j] = 0;
 				continue;
 			} else {
-				if (jumpable(canJump, stones, k, stones[k] - stones[i], len)) {
-					canJump[i][j] = true;
+				//递归检查
+				if (jumpable(canJump, stones, k, stones[k] - stones[i], length)) {
+					canJump[i][j] = 1;
 					return true;
 				}
 			}
 		}
-		canJump[i][j] = false;
+		canJump[i][j] = 0;
 		return false;
 	}
 } 
