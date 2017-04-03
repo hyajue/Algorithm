@@ -31,6 +31,18 @@
 * the gap between the 5th and 6th stone is too large.
 */
 
+/*
+solution 1 
+复杂度
+时间O(n^2) 空间O(n^2)
+
+思路：
+这种求可能性的问题 首先想能否用动态规划 考虑最基本的暴力解法是什么 然后怎么去利用dp去优化 
+在每个石头上有三个可能跳的距离 然后有n个石头 理论上有3^n种可能性(乘法原理) 但并非每个石头都要去跳一下 
+对于某个要经过的石头 也有三种可能到达的方式 动归优化的空间就有了
+维护一个二维数组canJump,canJump[i][j]表示从石头j跳到石头i的最远的可能性 初始化数组都为-1，代表未知可否
+然后递归滴去访问每一种可能性 由于我们在深搜的过程中更新canJump 所以等于是记忆化搜索 起到了剪枝的效果  
+*/
 
 public class FrogJump {
 	public boolean canCross(int[] stones) {
@@ -71,7 +83,50 @@ public class FrogJump {
 		canJump[i][j] = 0;
 		return false;
 	}
-} 
+}
+
+
+/*
+solution 2
+时间O() 空间O(n)
+
+思路：我为人人型动态规划 
+维护一个map,键为stones[i],值为在stones[i]可能跳的步数 
+*/
+
+
+public class FrogJump {
+	public boolean canCross(int[] stones) {
+		if (stones == null ||stones.length == 0) return false;
+		Map<Integer, Set<Integer>> map = new HashMap<Integer, Set<Integer>>();
+		for (int i = 0; i < stones.length; i++) {
+		  map.put(stones[i], new HashSet<Integer>());
+		  if (i == 0) {
+			  map.get(stones[i]).add(1);
+		  }
+		}
+		for (int i = 0; i < stones.length - 1; i++) {
+			int unit = stones[i];
+			for(int step : map.get(unit)) {
+				int nextPos = step + unit;
+				if (nextPos == stones[stones.length-1]) {
+					return true;
+				}
+				Set<Integer> set = map.get(nextPos);
+				if (set != null) {
+					set.add(step);
+					if (step - 1 > 0) {
+						set.add(step - 1);
+					}
+					set.add(step+1);
+				}
+			}
+		}
+		return false;
+	}
+}
+
+
 
 
 
