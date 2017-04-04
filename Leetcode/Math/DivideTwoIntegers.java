@@ -5,6 +5,10 @@
 */
 
 /*
+复杂度
+时间O(logn) 空间O(1)
+
+思路：位运算
 1. 被除数/除数=商 （忽略余数）=> 被除数=除数*商。
 
 2. 任意整数num可以表示为： num = a_0*2^0+a_1*2^1+...a_i*2^i+...+a_n*2^n.
@@ -24,27 +28,27 @@
 8. 考虑MIN_VALUE/-1的特殊情况: -2^31 / -1 -> -2147483648 / -1 => MAX_VALUE = 2147483647 = 2^31 - 1 
 */
 
-
 public class DivideTwoIntegers {
-    public int divide(int dividend, int divisor) {
-        int res = 0;
-		if (divisor == 0) {  // overflow
-			return Integer.MAX_VALUE;
+	public int divide(int dividend, int divisor) {
+		int res = 0;
+	if (divisor == 0) {  // overflow
+		return Integer.MAX_VALUE;
+	}
+	if (dividend == Integer.MIN_VALUE && divisor == -1) { // special case
+		return ~dividend;
+	}
+	//为了防止溢出 注意要先coerce成(long)再取绝对值 否则可能会溢出
+	long dividendL = Math.abs((long)dividend);
+	long divisorL = Math.abs((long)divisor);
+	
+	while (dividendL >= divisorL) {
+		int shiftNum = 0;
+		while (dividendL >= (divisorL<<shiftNum)) {
+			shiftNum++;
 		}
-		if (dividend == Integer.MIN_VALUE && divisor == -1) { // special case
-			return ~dividend;
-		}
-		long dividendL = Math.abs((long)dividend);
-		long divisorL = Math.abs((long)divisor);
-		
-		while (dividendL >= divisorL) {
-			int shiftNum = 0;
-			while (dividendL >= (divisorL<<shiftNum)) {
-				shiftNum++;
-			}
-			res += 1<<(shiftNum-1);
-			dividendL -= divisorL<<(shiftNum-1); // update dividendL for next loop
-		}
-		return (dividend > 0 ^ divisor > 0) ? -res : res; 
-    }
+		res += 1<<(shiftNum-1);
+		dividendL -= divisorL<<(shiftNum-1); // update dividendL for next loop
+	}
+	return (dividend > 0 ^ divisor > 0) ? -res : res; // bit XOR to determine sign of res
+	}
 } 
