@@ -30,10 +30,7 @@ solution 1
 递归法在LC上无法AC 总是TLE 
 */ 
  
- 4->5<-7->1->Null
- List: Interface (不可直接用 必须要去实现它)：ArrayList, LInkedlist 
- list[0] = n;
- 
+
 public class ReverseLinkedList {
   public ListNode reverseList(ListNode head) {
     List<NodeList> list = new ArrayList<NodeList>();
