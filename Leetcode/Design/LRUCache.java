@@ -26,7 +26,7 @@
 复杂度
 时间 O(1) for both get and put 空间O(n)
 
-思路: map + doubly list
+思路: map + doubly linked list
 get(key) -- O(1) 很明显用一个hashmap来实现O(1)的查询操作
 哈希表无序->无法做到least recent updated item deletion->考虑用队列
 队列无法做到移动非首位的元素->当移动任意元素时,需要考虑前驱和后续的连接->考虑用双向链表
@@ -43,8 +43,8 @@ public class LRUCache {
   public LRUCache(int capacity) {
 		this.head = new ListNode(0, 0);
     this.tail = new ListNode(0, 0);
-		head.next = tail;
-		tail.prev = head;
+		head.prev = tail;
+		tail.next = head;
 		this.size = 0;
 		this.capacity = capacity;
 		this.map = new HashMap<Integer, ListNode>();
@@ -85,16 +85,16 @@ public class LRUCache {
 	}
 	
 	private void putToHead(ListNode cur) {
-		cur.next = head.next;
-		cur.next.prev = cur;
-		head.next = cur;
-		cur.prev = head;
+		cur.next = head;
+		cur.prev = head.prev;
+		head.prev.next = cur;
+		head.prev = cur;
 	}
 	
 	private void removeLast() {
-	  ListNode last = tail.prev;
-		last.prev.next = tail;
-		tail.prev = last.prev;
+	  ListNode last = tail.next;
+		last.next.prev = tail;
+		tail.next = last.next;
 		map.remove(last.key); //不仅要删除链表中的数据 也要删除相应的map的数据
 	}
 	

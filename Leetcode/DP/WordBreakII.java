@@ -25,7 +25,7 @@ public class WordBreakII {
 	public List<String> wordBreak(String s, List<String> wordDict) {
 		Map<Integer, List<String>> memo = new HashMap<Integer, List<String>>();
 		memo.put(0, new ArrayList());
-		memo.get(0).add("");
+		memo.get(0).add(""); //长度为0时只能构成空字符
 		
 		for (int i = 1; i <= s.length(); i++) {
 			for (String str : wordDict) {
