@@ -19,7 +19,7 @@ public class MeetingRooms {
 		//重写compare方法 按照开始时间排序 
 		Arrays.sort(intervals, new Comparator<Interval>() {
 			public int compare(Interval i1, interval i2) {
-				return i1.start - i2.start;
+				return (i1.start == i2.start) ? i1.end - i2.end : i1.start - i2.start;
 			}
 		} );
 		

@@ -9,7 +9,7 @@
 时间O(nlogn) 空间O(n)
 
 思路：优先队列
-两个meeting冲突 就必然要两个rooms 有冲突的条件: meetingA.end > meetingB.start && meetingA.start < meetingB.end 
+两个meeting冲突 就必然要两个rooms 有冲突的条件: meetingA.end > meetingB.start  
 还是要先排序 然后指针i指向之前有冲突的最小的end的那个meeting -> 需要快速求得之前的最小end -> 利用优先队列
 
 heap
@@ -28,7 +28,11 @@ public class MeetingRoomsII {
   // base case
   if(intervals == null || intervals.length == 0) return 0;
   // sort
-  Arrays.sort(intervals, (a, b) -> a.start == b.start ? a.end - b.end : a.start - b.start);
+  Arrays.sort(intervals, new Comparator<Interval>() {
+	  public compare(Interval i1, Interval i2) {
+		  return (i1.start - i2.start) ? i1.end - i2.end : i1.start - i2.start;
+		}	
+	});
   // min heap to store the end
   PriorityQueue<Integer> minHeap = new PriorityQueue<>();
   minHeap.offer(intervals[0].end);

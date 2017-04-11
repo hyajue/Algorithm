@@ -125,15 +125,3 @@ public class FrogJump {
 		return false;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
