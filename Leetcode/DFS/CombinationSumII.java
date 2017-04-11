@@ -35,17 +35,17 @@ public class CombinationSumII {
     return res;	
   }
   private void helper(List<List<Integer>> res, List<Integer> curList, int[] candidates, int target, int start) {
-	if (target < 0) return;
-	if (target == 0) {
-	  res.add(new ArrayList<Integer>(curList));
-	  return;
-	} 
-	for (int i = start; i < candidates.length; i++) {
-	  if (i > start && candidates[i] == candidates[i-1]) continue; // 去重
-      curList.add(candidates[i]);
-	  helper(res, curList, candidates, target-candidates[i], i+1);
-	  curList.remove(curList.size()-1);
-	}        
+		if (target < 0) return;
+		if (target == 0) {
+			res.add(new ArrayList<Integer>(curList));
+			return;
+		} 
+		for (int i = start; i < candidates.length; i++) {
+			if (i > start && candidates[i] == candidates[i-1]) continue; // 去重
+				curList.add(candidates[i]);
+			helper(res, curList, candidates, target-candidates[i], i+1);
+			curList.remove(curList.size()-1);
+		}        
   }
 }
  
