@@ -30,9 +30,9 @@
 */ 
 
 public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        if (preorder == null || inorder == null) {
-			return null;
+  public TreeNode buildTree(int[] preorder, int[] inorder) {
+    if (preorder == null || inorder == null) {
+		  return null;
 		}
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 		for (int i = 0; i < inorder.length; i++) {
@@ -51,29 +51,4 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
 		root.right = helper(preorder, preL+idx-inL+1, preR, inorder, idx+1, inR, map);
 		return root;
 	}
-} 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
