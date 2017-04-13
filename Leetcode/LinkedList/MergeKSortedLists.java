@@ -28,27 +28,27 @@ public class MergeKSortedLists {
     if(lists.length == 0) return null;
     ListNode dummy = new ListNode(0);
     PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length, new Comparator<ListNode>() {
-	  public int compare(ListNode node1, ListNode node2) {
-	    return node1.val - node2.val;
-	  }
-	});
+			public int compare(ListNode node1, ListNode node2) {
+				return node1.val - node2.val;
+			}
+		});
     // initialize size of queue as K	
     for (int i = 0; i < lists.length; i++) {
-	  if (lists[i] != null) {
-	    queue.offer(lists[i]);
-	  }
-	}
-	ListNode curr = dummy;
-	while(!queue.isEmpty()) {
-	  // get the first val from heap
-	  curr.next = queue.poll();
-	  curr = curr.next;
-	  // put the item next to the first one into heap 
-	  if (curr.next != null) {
-	    queue.offer(curr.next);
-	  }
-	}
-	return dummy.next;
+			if (lists[i] != null) {
+				queue.offer(lists[i]);
+			}
+		}
+		ListNode curr = dummy;
+		while(!queue.isEmpty()) {
+			// get the first val from heap
+			curr.next = queue.poll();
+			curr = curr.next;
+			// put the item next to the first one into heap 
+			if (curr.next != null) {
+				queue.offer(curr.next);
+			}
+		}
+		return dummy.next;
   } 
 }
  

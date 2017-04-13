@@ -1,14 +1,14 @@
 /**
 * Implement atoi to convert a string to an integer.
 * 
-* Hint: Carefully consider all possible input cases. If you want a challenge, please do not see below and ask yourself what are the possible input cases.
+* Hint: Carefully consider all possible input cases.
 * 
 * Notes: It is intended for this problem to be specified vaguely (ie, no given input specs). You are responsible to gather all the input requirements up front.
 */
 
 /*
 首先判断为空，返回0
-考虑前面是空格，使用trim（）去掉，然后判断长度是否为0，是的话，返回0
+考虑前面是空格，使用trim()去掉，然后判断长度是否为0，是的话，返回0
 
 判断第一个字符是不是+和-，设置变量sign记录。
 
@@ -22,11 +22,11 @@
 */
 
 public class StringToInteger {
-    public int myAtoi(String str) {
-        if (str == null) {
-			return 0;
+	public int myAtoi(String str) {
+		if (str == null) {
+		return 0;
 		}
-		// remove spaces &nbsp
+	// remove spaces &nbsp
 		str = str.trim();
 		if (str.length() == 0) {
 			return 0;
@@ -40,13 +40,14 @@ public class StringToInteger {
 			idx++;
 			sign = -1;
 		}
-		
+	
 		// get number portion. exit when it comes overflow or non-number char
 		long number = 0;
 		while (idx < str.length()) {
+			// non-number char->break
 			if (str.charAt(idx) < '0' || str.charAt(idx) > '9') {
 				break;
-			}	
+			}		
 			number = number * 10 + (str.charAt(idx) - '0');
 			if (number >= Integer.MAX_VALUE) {
 				break;
@@ -55,27 +56,10 @@ public class StringToInteger {
 		}
 		if (number * sign >= Integer.MAX_VALUE) {
 			return Integer.MAX_VALUE;
-		}
-		else if (number * sign <= Integer.MIN_VALUE) {
+		} else if (number * sign <= Integer.MIN_VALUE) {
 			return Integer.MIN_VALUE;
-		}
-		else {
+		} else {
 			return (int)number*sign;
 		}
-    }
+	}
 } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -6,7 +6,7 @@
 
 /*
 复杂度
-时间 O(N) 空间 O(N)
+时间 O(n) 空间 O(n)
 
 思路:stack 
 栈最典型的应用就是验证配对情况，作为有效的括号，有一个右括号就必定有一个左括号在前面，所以我们可以将左括号都push进栈中，遇到右括号的时候再pop来消掉。
@@ -14,7 +14,7 @@
 
 注意
 栈在peek或者pop操作之前要验证非空，否则会抛出StackEmptyException。
-用哈希表存对应的parentheses pair
+用哈希表存对应的 parentheses pair
 */
 
 public class ValidParentheses {
@@ -26,15 +26,16 @@ public class ValidParentheses {
     map.put('{', '}');
     Stack<Character> stack = new Stack<Character>();
     for (int i = 0; i < s.length(); i++) {
-	  Character c = s.charAt(i);
-	  switch(c) {
-		case '(' : case '{' : case '[' :
+			Character c = s.charAt(i);
+			switch(c) {
+				case '(' : case '{' : case '[' :
           stack.push(c);
-          break;
-        case ')' : case '}' : case ']' :
+        break;
+				case ')' : case '}' : case ']' :
           if(stack.isEmpty() || c != map.get(stack.pop())) {
-			return false;
-		  }		
+						return false;
+					}
+        break;					
 	  }
 	}
     return stack.isEmpty();	

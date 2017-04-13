@@ -24,7 +24,7 @@ public class LetterCombinationsOfAPhoneNumber {
     List<String> res = new ArrayList<String>();
     if (digits == null || digits.length() == 0) return res;
     //建立 数字-字母 对应表格
-	Map<Character, char[]> map = new HashMap<Character, char[]>();
+		Map<Character, char[]> map = new HashMap<Character, char[]>();
     map.put('0', new char[]{});
     map.put('1', new char[]{});
     map.put('2', new char[] { 'a', 'b', 'c'});
@@ -36,33 +36,23 @@ public class LetterCombinationsOfAPhoneNumber {
     map.put('8', new char[] { 't', 'u', 'v'});
     map.put('9', new char[] { 'w', 'x', 'y', 'z'});
 	
-	StringBuilder sb = new StringBuilder();
-	helper(res, map, sb, digits, 0);
-	return res;
+		StringBuilder sb = new StringBuilder();
+		helper(res, map, sb, digits, 0);
+		return res;
   }
-  private void helper(List<String> res, Map<Character, char[]> map, StringBuilder sb, String digits, int idx) {
+  
+	private void helper(List<String> res, Map<Character, char[]> map, StringBuilder sb, String digits, int idx) {
     if (digits.length() == sb.length()) {
 	  res.add(sb.toString());
-	  return;
-	}
+			return;
+		}
+	  if (idx >= digits.length()) {
+	    return;
+	  }
     for (char c : map.get(digits.charAt(idx))) {
       sb.append(c);
-	  helper(res, map, sb, digits, idx+1);
-	  sb.deleteCharAt(sb.length()-1);
-	}	
+	    helper(res, map, sb, digits, idx+1);
+	    sb.deleteCharAt(sb.length()-1);
+	  } 	
   }
 } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -36,6 +36,7 @@ public class 3Sum {
 		}
 		return res;
   }
+	// twoSum as subroutine 
 	private List<List<Integer>> twoSum(int[] nums, int end, int target) {
 		List<List<Integer>> res = new ArrayList<List<Integer>>();
 		if (nums == null || nums.length <= 1) return res;

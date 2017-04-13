@@ -35,22 +35,23 @@ solution 1:
  * }
  */
 public class ValidateBinarySearchTree {
-    public boolean isValidBST(TreeNode root) {
-        if (root == null) return true;
+	public boolean isValidBST(TreeNode root) {
+		if (root == null) return true;
 		List<Integer> nodeList = new ArrayList<Integer>();
-		inOrderTraversal(root);
+		inOrderTraversal(root, nodeList);
 		for (int i = 1; i < nodeList.size(); i++) {
 			if (nodeList.get(i) <= nodeList.get(i-1)) {
 				return false;
 			}
 		}
 		return true;
-    }
-	private void inOrderTraversal(TreeNode root) {
+	}
+	
+	private void inOrderTraversal(TreeNode root, List<Integer> nodeList) {
 		if (root == null) return;
-		inOrderTraversal(root.left);
+		inOrderTraversal(root.left, nodeList);
 		nodeList.add(root.val);
-		inOrderTraversal(root.right);
+		inOrderTraversal(root.right, nodeList);
 	}
 }
 
