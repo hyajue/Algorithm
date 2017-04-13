@@ -16,17 +16,58 @@
    T(n) = O(n), S(n) = O(n)   
 */ 
 public class TwoSum {
-    public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> map = new HashMap<>();
+	public int[] twoSum(int[] nums, int target) {
+		Map<Integer, Integer> map = new HashMap<>();
 		for (int i = 0; i < nums.length; i++) {
 			int valToFind = target - nums[i];
 			if (map.containsKey(valToFind)) {
 				int index = map.get(valToFind);
 				return new int[] {i, index};
-			}
+		}
 			map.put(nums[i], i);
 		}
 		return null;
-    }
+	}
 }
 
+/*
+solution 2
+复杂度
+时间O(nlogn) 空间(n)
+
+思路：排序+双指针
+*/
+public class TwoSum {
+	public int[] twoSum(int[] nums, int target) {
+    int[] copyNums = new int[nums.length];
+    System.arraycopy(nums, 0, copyNums, 0, nums.length);
+		Arrays.sort(copyNums);
+		int left = 0;
+		int right = copyNums.length - 1;
+		int nums1 = 0;
+		int nums2 = 0;
+		while (left < right) {
+		  if (copyNums[left] + copyNums[right] == target) {
+			  nums1 = copyNums[left];
+				nums2 = copyNums[right];
+				break;
+			}	else if (copyNums[left] + copyNums[right] < target) {
+			  left++;
+			} else {
+			  right--;
+			}
+		}
+		left = -1;
+		right = -1;
+		for (int i = 0; i < nums.length; i++) {
+		  if (left == -1 && nums[i] == nums1) {
+			  left = i;
+				continue;
+			} 
+			if (right == -1 && nums[i] == nums2) {
+				right = i;
+			}
+		}
+		return new int[] {left, right};
+	}
+}
