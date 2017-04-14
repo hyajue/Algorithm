@@ -29,7 +29,31 @@ public class MedianOfTwoSortedArrays {
     if (nums1.length == 0 && nums2.length == 0) return 0;
 		int len = nums1.length + nums2.length;
 		if (len % 2 == 1) {
-			return findMedian(nums1, nums2,)
+			return findMedian(nums1, nums2,(len+1)/2); 
+		} else {
+		  double sum = findMedian(nums1, nums2, len/2) + findMedian(nums1, nums2, len/2 + 1);
+			return sum / 2;
+		}
+	}
+	private double findMedian(int[] nums1, int start1, int end1, int[] nums2, int start2, int end2, int k) {
+	  if (nums1.length == 0) return nums2[k-1];
+		if (nums2.length == 0) return nums1[k-1];
+		if (k == 1) return Math.min(nums1[0], nums2[0]);
+		// always assume nums1 has less length
+		if (nums1.length > nums2.length) {
+		  return findMedian(nums2, start2, end2, nums1, start1, end1, k);
+		}
+		int len1 = Math.min(nums1.length, k/2);
+		int len2 = k - idx1;
+		if (nums1[len1-1] < nums2[len2-1]) {
+		  return findMedian(nums1, len1, nums1.length-1, nums2, start2, end2, k - len1);
+		} else if (nums1[len1-1] < nums2[len2-1]) {
+			return findMedian(nums1, start1, end1, nums2, len2, end2, k - len2);
+		} else {
+		  return nums1[len-1];
 		}
 	}
 } 
+
+
+
