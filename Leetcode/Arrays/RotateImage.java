@@ -10,7 +10,7 @@
 /*
 solution 1
 复杂度
-时间O(n^2) 空间O(n)
+时间O(n^2) 空间O(1)
 
 思路：转置镜像法
 step 1: transpose the matrix: matrix[i][j] <-> matrix[j][i](转置)
