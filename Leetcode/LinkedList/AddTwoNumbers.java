@@ -27,31 +27,32 @@
  
 public class AddTwoNumbers {
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-		if (l1 == null && l2 == null) {
-			return null;
-		}
-		
-		ListNode sumNode = new ListNode(0);
-		ListNode ptrl1 = l1, ptrl2 = l2, ptrSumNode = sumNode;
+		if (l1 == null && l2 && null) return null;
+		ListNode ptr1 = l1;
+		ListNode ptr2 = l2; 
+		ListNode dummy = new ListNode(0);
+		ListNode cur = dummy;
 		int carry = 0;
-		int sum = 0;
+		int digit = 0;
 		
-		while (ptrl1 != null || ptrl2 != null || carry != 0) {
-			if (ptrl1 != null) {
-				sum += ptrl1.val;
-				ptrl1 = ptrl1.next;
+		
+		while (ptr1 != null || ptr2 != null || carry != 0) {
+			int sum = 0;
+			if (ptr1 != null) {
+				sum += ptr1.val;
+				ptr1 = ptr1.next;
 			}
-			if (ptrl2 != null) {
-				sum += ptrl2.val;
-				ptrl2 = ptrl2.next;
+			if (ptr2 != null) {
+				sum += ptr2.val;
+				ptr2 = ptr2.next;
 			}
-			sum += carry; //每次加上一位过来的进位
-			int curDigit = sum % 10;
-			ptrSumNode.next = new ListNode(curDigit);
-			ptrSumNode = ptrSumNode.next;
+			
+			sum += carry;
+      digit = sum % 10;
 			carry = sum / 10;
-			sum = 0;
+			cur.next = new ListNode(digit);
+			cur = cur.next;
 		}
-		return sumNode.next;
+		return dummy.next;
 	}
 } 
