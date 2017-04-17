@@ -26,7 +26,7 @@ public class FactorialTrailingZeroes {
 /*
 solution 2
 复杂度
-时间O(logn) 空间O()
+时间O(logn) 空间O(1)
 
 思路：iterative
 同solution1 找有多少个5 

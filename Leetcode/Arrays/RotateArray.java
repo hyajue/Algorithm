@@ -20,7 +20,7 @@ k可能大于数组长度，旋转不止一次，所以我们要先对k取余
 
 follow up: 
 如果是向左旋转k位而不是向右呢？
-还是同样的方法，只是之前在反转完整个数组后，将其前k个单独反转，后面的单独反转。而左旋时，我们是将其后k个单独反转，然后前面的单独反转。
+左旋时，我们是将其后k个单独反转，然后前面的单独反转。
 */
 
 public class RotateArray {
@@ -31,16 +31,18 @@ public class RotateArray {
     reverse(nums, 0, k-1);
     reverse(nums, k, nums.length-1);	
   }
+	
   private void reverse(int[] nums, int i, int j) {
-	while (i < j) {
-	  swap(nums, i, j);
-	  i++;
-	  j--;
-	}
+		while (i < j) {
+			swap(nums, i, j);
+			i++;
+			j--;
+		}
   }
-  private void swap(int[] nums, int i, int j) {
-	int tmp = nums[i];
-	nums[i] = nums[j];
-	nums[j] = tmp;
+	
+	private void swap(int[] nums, int i, int j) {
+		int tmp = nums[i];
+		nums[i] = nums[j];
+		nums[j] = tmp;
   }
 }
