@@ -59,7 +59,7 @@ public class BinaryTreeVerticalOrderTraversal {
 		
 		if (root == null) return res;
 		
-		//level order traversal the tree and keep tack of the colunm index using Map
+		//level order traversal the tree and keep tack of the column index using Map
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
 		Queue<Integer> column = new LinkedList<Integer>();
 		queue.offer(root);

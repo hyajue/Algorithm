@@ -22,17 +22,18 @@
 */  
  
 public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
-    public TreeNode buildTree(int[] inorder, int[] postorder) {
-        if (inorder == null || postorder == null || inorder.length == 0 || postorder.length == 0) {
-			return null;
-		}
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		for (int i = 0; i < inorder.length; i++) {
-			map.put(inorder[i], i);
-		}
-		TreeNode root = helper(inorder, 0, inorder.length-1, postorder, 0, postorder.length-1, map);
-		return root;
-    }
+	public TreeNode buildTree(int[] inorder, int[] postorder) {
+	  if (inorder == null || postorder == null || inorder.length == 0 || postorder.length == 0) {
+		  return null;
+	  }
+	  Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+	  for (int i = 0; i < inorder.length; i++) {
+		  map.put(inorder[i], i);
+	  }
+	  TreeNode root = helper(inorder, 0, inorder.length-1, postorder, 0, postorder.length-1, map);
+	  return root;
+	}
+	
 	private TreeNode helper(int[] inorder, int inL, int inR, int[] postorder, int postL, int postR, Map<Integer, Integer> map) {
 		if (inL > inR || postL > postR) {
 			return null;
