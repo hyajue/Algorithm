@@ -34,7 +34,7 @@ public class SubstringWithConcatenationOfAllWords {
 			Map<String, Integer> curMap = new HashMap<String, Integer>();
 			int cnt = 0; //窗口中的单词数
 			int left = i; //窗口左指针
-			for (int j = i; j < s.length() - wordLen; j += wordLen) {
+			for (int j = i; j <= s.length() - wordLen; j += wordLen) {
 				String str = s.substring(j, j+wordLen);
 				if (map.containKey(str)) {
 					if (curMap.containsKey(str)) {
