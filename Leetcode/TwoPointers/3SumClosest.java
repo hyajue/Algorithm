@@ -17,35 +17,36 @@
 public class 3SumClosest {
   public int threeSumClosest(int[] num, int target) {
     if (num == null || num.length <= 2) return Integer.MIN_VALUE;
-	Arrays.sort(num);
-	int minDiff = num[0] + num[1] + num[2] - target;
-	for (int i = 0; i < num.length - 2; i++) {
-		int subDiff = twoSum(num, target - num[i], i+1);
-		if (Math.abs(subDiff) < Math.abs(minDiff)) {
-			minDiff = subDiff;
+		Arrays.sort(num);
+		int minDiff = num[0] + num[1] + num[2] - target;
+		for (int i = 0; i < num.length - 2; i++) {
+			int subDiff = twoSum(num, target - num[i], i+1);
+			if (Math.abs(subDiff) < Math.abs(minDiff)) {
+				minDiff = subDiff;
+			}
 		}
-	}
-	int closest = minDiff + target;
-	return closest;
+		int closest = minDiff + target;
+		return closest;
   }
+	
   private int twoSum(int[] num, int target, int idx) {
     int minDiff = num[idx] + num[idx+1] - target;
-	int left = idx;
-	int right = num.length - 1;
-	while (left < right) {
-	  if (num[left] + num[right] == target) {
-	    return 0;
-	  }
-	  int subDiff = num[left] + num[right] - target;
-	  if (Math.abs(subDiff) < Math.abs(minDiff)) {
-		  minDiff = subDiff;
-	  }
-	  if (subDiff > 0) {
-		  right--;
-	  } else {
-		  left++;
-	  }
-	}
-	return minDiff;
+		int left = idx;
+		int right = num.length - 1;
+		while (left < right) {
+			if (num[left] + num[right] == target) {
+				return 0;
+			}
+			int subDiff = num[left] + num[right] - target;
+			if (Math.abs(subDiff) < Math.abs(minDiff)) {
+				minDiff = subDiff;
+			}
+			if (subDiff > 0) {
+				right--;
+			} else {
+				left++;
+			}
+		}
+		return minDiff;
   }
 } 	

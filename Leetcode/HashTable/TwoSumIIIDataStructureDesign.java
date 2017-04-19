@@ -45,31 +45,27 @@ public class TwoSum {
 // if more add ops and quick add is preferred:
 public class TwoSum { 
   Map<Integer, Integer> map;
-  public TwoSum() {
-	map = new HashMap<Integer, Integer>();
+  
+	public TwoSum() {
+		map = new HashMap<Integer, Integer>();
   }
-  public void add(int number) {
-	if (map.containsKey(number)) {
-	  map.put(number, map.get(number)+1);
-	} else {
-	  map.put(number, 1);
-	}
+  
+	public void add(int number) {
+		if (map.containsKey(number)) {
+			map.put(number, map.get(number)+1);
+		} else {
+			map.put(number, 1);
+		}
   }
+	
   public boolean find(int target) {
-	for (int num : map.keySet()) {
-	  if (map.containsKey(target-num)) {
-		return true;
-	  } else if(map.get(num) >=2 && (target - num == num)) {
-		return true;
-	  }
-	}
-	return false;
+		for (int num : map.keySet()) {
+			if (map.containsKey(target-num)) {
+				return true;
+			} else if(map.get(num) >= 2 && (target - num == num)) {
+				return true;
+			}
+		}
+		return false;
   }
 } 
-
-
-
-
-
-
-

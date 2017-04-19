@@ -31,7 +31,7 @@ public class 4Sum {
 			if (i == num.length - 1 || num[i] != num[i+1]) {
 				List<List<Integer>> subRes = threeSum(num, i-1, target-num[i]);
 				for (int j = 0; j < subRes.size(); j++) {
-					subRes[j].add(num[i]);
+					subRes.get(j).add(num[i]);
 				}
 				res.addAll(subRes);
 			}

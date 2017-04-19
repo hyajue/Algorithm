@@ -27,32 +27,33 @@
 public class MissingRanges {  
   public List<String> findMissingRanges(int[] nums, int lower, int upper) {  
     List<String> res = new ArrayList<String>();
-	if (nums == null || nums.length() = 0) {
-	  res.add(new String(lower + "->" + upper));
-	  return res;
+		if (nums == null || nums.length() = 0) {
+			res.add(new String(lower + "->" + upper));
+			return res;
+		}
+		//初始化prev为 lower-1, 方便第一次与nums[0]比较判断是否存在missing range
+		int prev = lower - 1;
+		int curr = 0;
+		for (int i = 0; i <= nums.length; i++) {
+			if (i == nums.length) {
+				//遍历到数组末尾下一个位置，将curr赋值为上界+1，方便与upper比较是否存在missing range  
+				curr = upper + 1;
+			} else {
+				curr = nums[i];
+			}
+			if (curr - prev > 1) {
+				//prev与curr相差超过1，说明存在missing range
+				res.add(getRange(prev+1, curr-1));
+			}
+			prev = curr;
+		}
+		return res;
 	}
-	// 初始化prev为 lower-1, 方便第一次与nums[0]比较判断是否存在missing range
-	int prev = lower - 1;
-	int curr = 0;
-	for (int i = 0; i <= nums.length; i++) {
-	  if (i == nums.length) {
-		// 遍历到数组末尾下一个位置，将curr赋值为上界+1，方便与upper比较是否存在missing range  
-		curr = upper + 1;
-	  } else {
-		  curr = nums[i];
-	  }
-	  if (curr - prev > 1) {
-		//prev与curr相差超过1，说明存在missing range
-		res.add(getRange(prev+1, curr-1));
-	  }
-	  prev = curr;
-	}
-	return res;
-  }
-  private String getRange(int from, int to) {
-	if (from == to) {
+  
+	private String getRange(int from, int to) {
+		if (from == to) {
       return String.valueOf(from);
-	}
-	return new String(from + "->" + to);
+		}
+		return new String(from + "->" + to);
   }  
 }  

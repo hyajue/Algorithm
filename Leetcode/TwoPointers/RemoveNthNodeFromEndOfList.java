@@ -25,7 +25,7 @@
 时间 O(n) 空间O(1)
 
 思路：双指针 追击问题 
-快指针先跑n步 慢指针再跑 当快指针跑到链表尾部 
+快指针先跑n步 慢指针再跑 当快指针跑到链表尾部的null 慢指针的next即指向待删除节点 
 */
  
 public class RemoveNthNodeFromEndOfList {

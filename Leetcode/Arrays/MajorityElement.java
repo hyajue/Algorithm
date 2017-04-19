@@ -5,18 +5,21 @@
 */
 
 /*
-维护一个HashMap，它直接判断次数如果大于nums.length，就输出该元素
+复杂度
+时间 O(n) 空间O(n)
+
+思路：
+维护一个HashMap, 每次遇到元素就加入该表， 再判断出现次数如果大于(nums.length)/2，就输出该元素
 */
 
 public class MajorityElement {
-    public int majorityElement(int[] nums) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+	public int majorityElement(int[] nums) {
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 		int res = 0;
 		for (int num : nums) {
 			if (!map.containsKey(num)) {
 				map.put(num, 1);
-			}
-			else {
+			} else {
 				map.put(num, map.get(num)+1);
 			}
 			if (map.get(num) > nums.length/2) {
@@ -25,5 +28,5 @@ public class MajorityElement {
 			}
 		}
 		return res;
-    }
+	}
 } 

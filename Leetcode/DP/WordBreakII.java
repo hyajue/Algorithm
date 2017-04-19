@@ -46,13 +46,13 @@ public class WordBreakII {
 		return res;
 	}
 	
-	private void restore(List<String> res, int idx, String curStr, Map<Integer, List<String>> memo) {
-		if (idx == 0) {
+	private void restore(List<String> res, int length, String curStr, Map<Integer, List<String>> memo) {
+		if (length == 0) {
 			res.add(curStr);
 			return;
 		}
-		for (String str : memo.get(idx)) {
-			int j = idx - str.length();
+		for (String str : memo.get(length)) {
+			int j = length - str.length();
 			if (j >= 0 && memo.containsKey(j)) {
 				String tmp = str + (curStr.equals("") ? "" : " " + curStr);
 				restore(res, j, tmp, memo);

@@ -39,46 +39,30 @@ K等于0或1的时候直接返回原链表
 public class ReverseNodesInKGroup {
   public ListNode reverseKGroup(ListNode head, int k) {
     if (head == null || head.next == null || k == 0 || k == 1) return head;
-    ListNode start = head; 
-    ListNode end = head;
-    int cnt = 0;
+		ListNode start = head; 
+		ListNode end = head;
+		int cnt = 0;
     while (cnt < k && end.next != null) {
-	  end = end.next;
-	  cnt++;
-	}
+			end = end.next;
+			cnt++;
+		}
     if(cnt == k) {
-	  ListNode next = end.next;
-	  reverse(start, end);
-	  start.next = reverseKGroup(next, k);
-	  return end;
-	}
-	return start;  
+			ListNode next = end.next;
+			reverse(start, end);
+			start.next = reverseKGroup(next, k);
+			return end;
+		}
+		return start;  
   }
+	
   private void reverse(ListNode start, ListNode end) {
     ListNode pre = null;
-	while (start != end) {
-	  ListNode next = start.next;
-	  start.next = pre;
-	  pre = start;
-	  start = next;
-	}
-	start.next = pre;
+		while (start != end) {
+			ListNode next = start.next;
+			start.next = pre;
+			pre = start;
+			start = next;
+		}
+		start.next = pre;
   }
 } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
