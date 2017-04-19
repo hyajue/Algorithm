@@ -16,24 +16,24 @@ solution 1:
 
 public class ImplementStrStr {
   public int strStr(String haystack, String needle) {
-      if (haystack == null || needle == null || needle.length() == 0) {
-		return 0;
-	}
-	if (needle.length() > haystack.length()) {
-		return -1;
-	}
-	for (int i = 0; i < haystack.length() - needle.length(); i++) {
-		boolean matchFlag = true;
-		for (int j = 0; j < needle.length(); j++) {
-			if (haystack.charAt(i+j) != needle.charAt(j)) {
-				matchFlag = false;
-				break;
+    if (haystack == null || needle == null || needle.length() == 0) {
+			return 0;
+		}
+		if (needle.length() > haystack.length()) {
+			return -1;
+		}
+		for (int i = 0; i <= haystack.length() - needle.length(); i++) {
+			boolean matchFlag = true;
+			for (int j = 0; j < needle.length(); j++) {
+				if (haystack.charAt(i+j) != needle.charAt(j)) {
+					matchFlag = false;
+					break;
+				}
+			}
+			if (matchFlag) {
+				return i;	
 			}
 		}
-		if (matchFlag) {
-			return i;	
-		}
-	}
-	return -1;
+		return -1;
   }
 } 

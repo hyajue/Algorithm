@@ -21,14 +21,14 @@
 public class RemoveElement {
   public int removeElement(int[] nums, int val) {
     if (nums == null) return 0;
-		int len = nums.length - 1;
-		for (int i = 0; i <= len; i++) {
+		int ptr = nums.length - 1;
+		for (int i = 0; i <= ptr; i++) {
 			if (nums[i] == val) {
-				nums[i] = nums[len];
+				nums[i] = nums[ptr];
 				i--;
-				len--;
+				ptr--;
 			}
 		}
-		return len + 1;
+		return ptr + 1;
   }
 }

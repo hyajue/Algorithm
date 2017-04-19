@@ -10,31 +10,33 @@
 */
 
 /*
+复杂度
+时间O(n) 空间O(1)
+
+思路：
 因为数组已经排好序了，用两个指针分别从头尾开始找就可以了。
 如果头尾和大于target，说明尾太大，小于target说明头太小。
 根据大小移动指针即可。
 */
 
 public class TwoSumII {
-    public int[] twoSum(int[] numbers, int target) {
-        if (numbers == null || numbers.length == 0) {
+	public int[] twoSum(int[] numbers, int target) {
+		if (numbers == null || numbers.length == 0) {
 			return null;
 		}
 		int front = 0; 
 		int end = numbers.length - 1;
-		
+	
 		while (front != end) {
 			int tmp = numbers[front] + numbers[end];
 			if (tmp < target) {
 				front++;
-			}
-			else if (tmp > target) {
+			} else if (tmp > target) {
 				end--;
-			}
-			else {
+			} else {
 				return new int[] {front+1, end+1};
 			}
- 		}
+		}
 		return null;
-    }
+	}
 } 
