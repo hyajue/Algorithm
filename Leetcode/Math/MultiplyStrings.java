@@ -49,6 +49,7 @@ public class MultiplyStrings {
 			}
 			sb.insert(0, mod);
 		}
+		//除去头位的零：res[]有可能会出现零在末尾(有的位置没有数)
 		while (sb.charAt(0) == '0') {
 			sb.deleteCharAt(0);
 		}

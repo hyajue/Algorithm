@@ -28,20 +28,21 @@ public class Permutations {
     helper(res, new ArrayList<Integer>(), nums, new boolean[nums.length]);
     return res;    
   }
+	
   private void helper(List<List<Integer>> res, List<Integer> curList, int[] nums, boolean[] used) {
-	if (curList.size() == nums.length) {
-	  res.add(new ArrayList<Integer>(curList));
-	  return;
-	} else {
-	  for (int i = 0; i < nums.length; i++) {
-	    if (!used[i]) {
-		  used[i] = true;
-		  curList.add(nums[i]);
-		  helper(res, curList, nums, used);
-		  curList.remove(curList.size() - 1);
-		  used[i] = false;
-		}
+	  if (curList.size() == nums.length) {
+	    res.add(new ArrayList<Integer>(curList));
+	    return;
+	  } else {
+	    for (int i = 0; i < nums.length; i++) {
+	      if (!used[i]) {
+					used[i] = true;
+					curList.add(nums[i]);
+					helper(res, curList, nums, used);
+					curList.remove(curList.size() - 1);
+					used[i] = false;
+		    }
+	    }
 	  }
-	}
   }
 } 
