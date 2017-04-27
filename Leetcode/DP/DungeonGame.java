@@ -23,6 +23,10 @@
 */
 
 /*
+复杂度
+时间O(n^2)  空间O(n^2)
+
+思路：dp
 classic DP problem. 
 maitain 2D array minHP[i][j]: minDP needed when entering grip[i][j].
 if (dungeon[i][j] < 0): needs minHP = -dungeon[i][j] + 1;
@@ -31,30 +35,31 @@ if (dungeon[i][j] >= 0): minHP = 1.
 
 
 public class DungeonGame {
-    public int calculateMinimumHP(int[][] dungeon) {
-        if (dungeon.length == 0 || dungeon == null) {
-			return 0;
-		}    
-		int row = dungeon.length;
-		int col = dungeon[0].length;
-		int[][] minHP = new int[row][col];
-		
-		// initializes last row and col of minHP
-		minHP[row-1][col-1] = dungeon[row-1][col-1] >= 0 ? 1 : (-dungeon[row-1][col-1] + 1);
-		
-		// last col of minHP
-		for (int i = row - 2; i >= 0; i--) {
-			minHP[i][col-1] = Math.max(1, -dungeon[i][col-1]+minHP[i+1][col-1]);
-		}
-		for (int j = col - 2; j >= 0; j--) {
-			minHP[row-1][j] = Math.max(1, -dungeon[row-1][j]+minHP[row-1][j+1]);
-		}
-		
-		for (int i = row - 2; i >= 0; i--) {
-			for (int j = col - 2; j >= 0; j--) {
-				minHP[i][j] = Math.max(1, Math.min(minHP[i+1][j], minHP[i][j+1])-dungeon[i][j]);
-			}
-		}
-		return minHP[0][0];
-    }
+	public int calculateMinimumHP(int[][] dungeon) {
+		if (dungeon.length == 0 || dungeon == null) {
+		 return 0;
+	 }    
+	  int row = dungeon.length;
+	  int col = dungeon[0].length;
+	  int[][] minHP = new int[row][col];
+	
+	  // initializes last row and col of minHP
+	  minHP[row-1][col-1] = dungeon[row-1][col-1] >= 0 ? 1 : (-dungeon[row-1][col-1] + 1);
+	
+	  // last col of minHP
+	  for (int i = row - 2; i >= 0; i--) {
+		  minHP[i][col-1] = Math.max(1, -dungeon[i][col-1]+minHP[i+1][col-1]);
+	  }
+		// last row of minHP
+	  for (int j = col - 2; j >= 0; j--) {
+	 	  minHP[row-1][j] = Math.max(1, -dungeon[row-1][j]+minHP[row-1][j+1]);
+	  }
+	  // general cases
+	  for (int i = row - 2; i >= 0; i--) {
+		  for (int j = col - 2; j >= 0; j--) {
+			  minHP[i][j] = Math.max(1, Math.min(minHP[i+1][j], minHP[i][j+1])-dungeon[i][j]);
+		  }
+	  }
+	  return minHP[0][0];
+	}
 } 

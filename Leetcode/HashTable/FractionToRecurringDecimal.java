@@ -28,6 +28,7 @@
 
 注意点2：考虑溢出，如果输入为Integer.MIN_VALUE，取绝对值后会溢出。
 */
+
 public class FractionToRecurringDecimal {
 	public String fractionToDecimal(int numerator, int denominator) { 
 	  if (numerator == 0) return "0";

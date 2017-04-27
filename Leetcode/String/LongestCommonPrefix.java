@@ -6,8 +6,7 @@
 复杂度
 时间:O(n*m), where n is length of strs and m is length of strs[0]. 空间:O(1)
 
-思路
-
+思路:挨个比对
 */
 
 public class LongestCommonPrefix {
@@ -17,7 +16,7 @@ public class LongestCommonPrefix {
     for (int i = 0; i < strs[0].length(); i++) {
 			char c = strs[0].charAt(i);
 			for (String str : strs) {
-			// 如果当前长度已经超过该串长度或者当前对比字符不匹配 则返回  
+			  // 如果当前长度已经超过该串长度或者当前对比字符不匹配 则返回  
 				if (str.length() < i+1 || str.charAt(i) != c) {
 					return sb.toString();
 				}

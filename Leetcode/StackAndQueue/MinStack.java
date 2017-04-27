@@ -39,9 +39,9 @@ public class MinStack {
   }
   
   public void push(int x) {
-    stack.add(x);
-		if (minStack.isEmpty() || minStack.get(minStack.size()-1) >= x) {
-			minStack.add(x);
+    stack.push(x);
+		if (minStack.isEmpty() || minStack.peek() >= x) {
+			minStack.push(x);
 		}
   }
   
@@ -49,22 +49,22 @@ public class MinStack {
     if (stack.isEmpty()) {
 			return;
 		} 
-		int item = stack.remove(stack.size()-1);
-		if (!minStack.isEmpty() && item == minStack.get(minStack.size()-1)) {
-			minStack.remove(minStack.size()-1);
+		int item = stack.pop();
+		if (!minStack.isEmpty() && item == minStack.peek()) {
+			minStack.pop();
 		}
   }
   
   public int top() {
     if (!stack.isEmpty()) {
-			return stack.get(stack.size()-1);
+			return stack.peek();
 		}  
 		return 0;
   }
   
   public int getMin() {
     if (!minStack.isEmpty()) {
-			return minStack.get(minStack.size()-1);
+			return minStack.peek();
 		}  
 		return 0;
   }

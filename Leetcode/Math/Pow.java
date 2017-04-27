@@ -13,40 +13,38 @@ m^13 = m^(2^3 + 2^2 + 2^0) = m^(2^3) * m^(2^2) * m(2^0)
 */
 
 public class Pow {
-    public double myPow(double x, int n) {
-        if (n == 0) {
-			return 1.0;
-		}
-		double res = 1.0;
-		if (n < 0) { // determine if 1.0/x would cause overflow 
-			if (x >= 1.0/Double.MAX_VALUE || x <= 1.0/-Double.MAX_VALUE) {
-				x = 1.0 / x;
-			}
-			else {
-				return Double.MAX_VALUE;
-			}
-			if ( n == Integer.MIN_VALUE) {
-				res *= x;
-				n++;
-			}
-		}
-		n = Math.abs(n);
-		boolean isNeg = false;
-		if (n%2==1 && x<0) {
-			isNeg = true;
-		}
-		x = Math.abs(x);
-		while (n > 0) {
-			if ((n&1) == 1) {
-				if (res > Double.MAX_VALUE/x) {
-					return Double.MAX_VALUE;
-				}
-				res *= x;
-			}
-			x *= x;
-			n = n>>1;
-		}
-		return isNeg ? -res : res;
-    }
+	public double myPow(double x, int n) {
+	  if (n == 0) {
+		  return 1.0;
+	  }
+	  double res = 1.0;
+	  if (n < 0) { // determine if 1.0/x would cause overflow 
+		  if (x >= 1.0/Double.MAX_VALUE || x <= 1.0/-Double.MAX_VALUE) {
+			  x = 1.0 / x;
+		  } else {
+			  return Double.MAX_VALUE;
+		  }
+		  if (n == Integer.MIN_VALUE) {
+			  res *= x;
+			  n++; // to avoid overflow at n = Math.abs(n)
+		  }
+	  }
+	  n = Math.abs(n);
+	  boolean isNeg = false;
+	  if (n%2==1 && x<0) {
+		  isNeg = true;
+	  }
+	  x = Math.abs(x);
+	  while (n > 0) {
+		  if ((n&1) == 1) {
+			  if (res > Double.MAX_VALUE/x) {
+				  return Double.MAX_VALUE;
+			  }
+			  res *= x;
+		  }
+		  x *= x;
+		  n = n>>1;
+	  }
+	  return isNeg ? -res : res;
+  }
 } 
-

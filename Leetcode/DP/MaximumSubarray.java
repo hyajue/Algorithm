@@ -9,6 +9,8 @@
 solution 1:
 复杂度：
 时间O(n) 空间O(n)
+
+思路:dp
 */
 
 public class MaximumSubarray {
@@ -18,13 +20,13 @@ public class MaximumSubarray {
     res[0] = nums[0];
     int maxSum = nums[0];
     for (int i = 1; i < nums.length; i++) {
-	  if (res[i-1] > 0) {
-		res[i] = res[i-1] + nums[i];
-	  } else {
-		res[i] = nums[i];
+	    if (res[i-1] > 0) {
+		    res[i] = res[i-1] + nums[i];
+	    } else {
+		    res[i] = nums[i];
+	    }
+	    maxSum = Math.max(maxSum, res[i]);
 	  }
-	  maxSum = Math.max(maxSum, res[i]);
-	}
     return maxSum;    
   }
 } 
@@ -43,8 +45,8 @@ public class MaximumSubarray {
     int localMax = nums[0];
     for (int i = 1; i < nums.length; i++) {
       localMax = Math.max(localMax+nums[i], nums[i]);
-	  globalMax = Math.max(globalMax, localMax);
-	}
+	    globalMax = Math.max(globalMax, localMax);
+	  }
     return globalMax;    
   }
 } 

@@ -23,7 +23,7 @@
 public class RomanToInteger {
 	public int romanToInt(String s) {
 		if (s == null || s.length() == 0) {
-		return 0;
+		 return 0;
 		}     
 		Map<Character, Integer> map = new HashMap<Character, Integer>();
 		map.put('I', 1);

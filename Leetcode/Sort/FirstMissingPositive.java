@@ -32,7 +32,7 @@ public class FirstMissingPositive {
 				int tmp = nums[nums[i]-1];
 				nums[nums[i]-1] = nums[i];
 				nums[i] = tmp;
-				i--; // note that i shuuld stay here until nums[i] is in place  
+				i--; // note that i should stay here until nums[i] is in place  
 			}
 		} 
     for (int idx = 0; idx < len; idx++) {
