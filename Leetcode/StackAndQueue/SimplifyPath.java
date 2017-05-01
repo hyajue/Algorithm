@@ -39,29 +39,29 @@ unix style path的规则如下：
 public class SimplifyPath {
   public String simplifyPath(String path) {
     if (path == null || path.length() == 0) return "/";
-      Stack<String> stack = new Stack<String>();
-      String[] items = path.split("/");
-      for (String item : items) {
+    Stack<String> stack = new Stack<String>();
+    String[] items = path.split("/");
+    for (String item : items) {
 	    switch (item) {
-		  case "." : // 跳过
-		    break;
-		  case "" :
-		    break;
-		  case ".." : 
-		    if (!stack.isEmpty()) {
-			  stack.pop();
-			} 
-			break;
-		  default: 
-		    stack.push(item);
-		}
+				case "." : // 跳过
+					break;
+				case "" :
+					break;
+				case ".." : 
+					if (!stack.isEmpty()) {
+						stack.pop();
+					} 
+					break;
+				default: 
+					stack.push(item);
+			}
 	  }
 	  StringBuilder sb = new StringBuilder();
 	  if (stack.isEmpty()) {
 	    return "/";
 	  }
 	  while (!stack.isEmpty()) {
-		sb.insert(0, "/" + stack.pop());
+			sb.insert(0, "/" + stack.pop());
 	  }
 	  return sb.toString();
   }

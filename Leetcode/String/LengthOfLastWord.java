@@ -17,9 +17,9 @@ public class LengthOfLastWord {
     int idx = s.length() - 1;
     // skip the trailing spaces 
     while (idx >= 0) {
-	  if (s.charAt(idx) != ' ') break;
-	  idx--;
-	}
+	    if (s.charAt(idx) != ' ') break;
+	    idx--;
+	  }
     // the ending idx 
     int end = idx;
     // if already uder flow, then return 0

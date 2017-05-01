@@ -19,7 +19,7 @@
 时间 O(N) 空间 O(1)
 
 由于我们只要得到第K个全排列，而不是所有全排列，我们不一定要将所有可能都搜索一遍。根据全排列顺序的性质，
-我们可以总结出一个规律：假设全排列有n个数组成，则第k个全排列的第一位是k/(n-1)!。为了更形象一点，举例如下：
+我们可以总结出一个规律：假设全排列有n个数组成，则第k个全排列的第一位是k/(n-1)!. 为了更形象一点，举例如下：
 
 123
 132
@@ -41,20 +41,20 @@ public class PermutationSequence {
     int mod = 1;
     // get n! and cadidate number list
     for (int i = 1; i <= n; i++) {
-	  mod = mod * i;
-	  nums.add(i);
-	}
+	    mod = mod * i;
+	    nums.add(i);
+	  }
     //decrement k to make division convenient  
     k--;
     StringBuilder sb = new StringBuilder();
     for(int i = 0; i < n; i++) {
-	  mod = mod / (n - i);
-	  
-	  int first = k / mod;
-	  k %= mod;
-	  sb.append(nums.get(first));
-	  nums.remove(first);
-	}
+			mod = mod / (n - i);
+			
+			int first = k / mod;
+			k %= mod;
+			sb.append(nums.get(first));
+			nums.remove(first);
+	  }
     return sb.toString(); 	
   }
 } 
