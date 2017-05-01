@@ -36,11 +36,11 @@ public class MergeIntervals {
         if (intervals == null || intervals.size() == 0) return res;
         Comparator<Interval> cmp = new Comparator<Interval>() {
             @Override
-            Public int compare(Interval i1, Interval i2) {
+            public int compare(Interval i1, Interval i2) {
                 if (i1.start == i2.start) {
                   return i1.end - i2.end;    
                 } 
-                return i1.end - i2.end;
+                return i1.start - i2.start;
             }
         };
         Collections.sort(intervals, cmp);

@@ -14,6 +14,10 @@
 */
 
 /*
+复杂度
+时间：O(n) 空间O(1)
+
+思路：三路快排
 Using 3-way quick sort to achieve one-pass algo
 pick '1' as pivot:
 [less than 1, ==1, bigger than 1] 
@@ -22,30 +26,28 @@ index counting sort is also a solution, which can be used in many other question
 */
 
 public class SortColors {
-    public void sortColors(int[] nums) {
-        if (nums == null || nums.length == 0) {
-			return;
-		}
-		int i = 0; 				// nums[0...<i) == 0
-		int j = 0; 				// nums[i...<j) == 1
-		int k = nums.length; 	// nums[k...<n) == 2
-		int tmp = 0;
-		while (j < k) {
-			if (nums[j] == 1) {
-				j++;
-			}
-			else if (nums[j] == 0) {
-				tmp = nums[j];
-				nums[j++] = nums[i];
-				nums[i++] = tmp;
-			}
-			else { // num[j] == 2
-				tmp = nums[j];
-				nums[j] = nums[k-1];
-				nums[k-1] = tmp;
-				k--;
-			}
-		}
-		return;
-    }
+	public void sortColors(int[] nums) {
+		if (nums == null || nums.length == 0) return;
+	  int i = 0; 				// nums[0...<i) == 0
+	  int j = 0; 				// nums[i...<j) == 1
+	  int k = nums.length; 	// nums[k...<n) == 2
+	  int tmp = 0;
+	  while (j < k) {
+		  if (nums[j] == 1) {
+			  j++;
+		  }
+		  else if (nums[j] == 0) {
+			  tmp = nums[j];
+			  nums[j++] = nums[i];
+			  nums[i++] = tmp;
+		  }
+		  else { // num[j] == 2
+			  tmp = nums[j];
+			  nums[j] = nums[k-1];
+			  nums[k-1] = tmp;
+			  k--;
+		  }
+	  }
+	  return;
+	}
 }

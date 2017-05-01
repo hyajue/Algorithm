@@ -25,22 +25,21 @@ N皇后套路 用循环递归地去处理子问题
 public class Combinations {
   public List<List<Integer>> combine(int n, int k) {
     List<List<Integer>> res = new ArrayList<List<Integer>>();
-    if ( n <= 0 || n < k) {
+    if ( n <= 0 || n < k) return res;
+	  helper(1, n, k, new ArrayList<Integer>(), res);
 	  return res;
-	}      
-	helper(1, n, k, new ArrayList<Integer>(), res);
-	return res;
   }
-  private void helper(int start, int n, int k, List<Integer> curList, List<List<Integer>> res) {
-	if (curList.size() == k) {
-	  res.add(new ArrayList<Integer>(curList));
-	  return;
-	} else {
-	  for (int i = start; i <= n; i++) {
-		curList.add(i);
-		helper(i+1, n, k, curList, res);
-		curList.remove(curList.size()-1);
+  
+	private void helper(int start, int n, int k, List<Integer> curList, List<List<Integer>> res) {
+	  if (curList.size() == k) {
+	    res.add(new ArrayList<Integer>(curList));
+	    return;
+	  } else {
+	    for (int i = start; i <= n; i++) {
+		    curList.add(i);
+		    helper(i+1, n, k, curList, res);
+		    curList.remove(curList.size()-1);
+	    }
 	  }
-	}
   }
 } 

@@ -32,41 +32,27 @@ public class WordSearch {
     if (board == null || board.length == 0 || board[0].length == 0) return false;
     if (word == null || word.length() == 0) return true;
     boolean[][] visited = new boolean[board.length][board[0].length];
-	for (int i = 0; i < board.length; i++) {
-	  for (int j = 0; j < board[0].length; j++) {
-		if(dfs(board, word, visited, 0, i, j)) {
-		  return true;
-		}
-	  }  
-	}
+	  for (int i = 0; i < board.length; i++) {
+	    for (int j = 0; j < board[0].length; j++) {
+		    if(dfs(board, word, visited, 0, i, j)) {
+		      return true;
+		    }
+	    }  
+	  }
     return false;	
   }
+	
   private boolean dfs(char[][] board, String word, boolean[][] visited, int len, int x, int y) {
-	if (len == word.length()) {
-	  return true;
-	}
-	if (x<0 || y<0 || x>=board.length || y>=board[0].length || visited[x][y] || board[x][y]!=word.charAt(len)) {
-	  return false;
-	}
-	visited[x][y] = true;
-	boolean res = dfs(board, word, visited, len+1, x-1, y)
-				|| dfs(board, word, visited, len+1, x+1, y)
-				|| dfs(board, word, visited, len+1, x, y+1)
-				|| dfs(board, word, visited, len+1, x, y-1);
-	visited[x][y] = false;
-	return res;
+	  if (len == word.length()) return true;
+	  if (x<0 || y<0 || x>=board.length || y>=board[0].length || visited[x][y] || board[x][y]!=word.charAt(len)) {
+	    return false;
+	  }
+	  visited[x][y] = true;
+	  boolean res = dfs(board, word, visited, len+1, x-1, y)
+				      || dfs(board, word, visited, len+1, x+1, y)
+				      || dfs(board, word, visited, len+1, x, y+1)
+				      || dfs(board, word, visited, len+1, x, y-1);
+	  visited[x][y] = false;
+	  return res;
   }
-}
-
-
-
-
-
-
-
-
-
-
-
-
- 
+} 

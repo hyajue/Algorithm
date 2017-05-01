@@ -16,7 +16,7 @@
 scan input list to find where to insert newInterval
 if newInterval.end < curInterval.start: insert front of curInterval 
 if curInterval.end < newInterval.strat: next interval 
-if curInterval has overlaps with curInterval: newStart = min of two starts; newEnd = max of two ends
+if newInterval has overlaps with curInterval: newStart = min of two starts; newEnd = max of two ends
 if no overlaps with any curIntervals: insert at end of input list
 */
 
@@ -57,8 +57,3 @@ public class InsertInterval {
 		return res;
     }
 }
-
-
-
-
- 

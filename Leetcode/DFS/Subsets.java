@@ -37,13 +37,14 @@ public class Subsets {
     helper(res, new ArrayList<Integer>(), nums, 0);
     return res;	
   }
+	
   private void helper(List<List<Integer>> res, List<Integer> curList, int[] nums, int idx) {
-	if (idx > nums.length) return;
-	res.add(new ArrayList<Integer>(curList));
-	for (int i = idx; i < nums.length; i++) {
-	  curList.add(nums[i]);
-	  helper(res, curList, nums, i+1);
-	  curList.remove(curList.size()-1);
-	}
+	  if (idx > nums.length) return;
+	  res.add(new ArrayList<Integer>(curList));
+  	for (int i = idx; i < nums.length; i++) {
+	    curList.add(nums[i]);
+	    helper(res, curList, nums, i+1);
+	    curList.remove(curList.size()-1);
+	  }
   }
 } 
