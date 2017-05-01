@@ -10,10 +10,11 @@
 
 /*
 复杂度
-时间：O() 空间O()
+时间：O(len1*len2) 空间O(len1*len2), where len1 = s1.length() and len2 = s2.length().
 
 思路：dp
-
+res[i][j] represents min edit distance from s1[0, i-1] to s2[0, j-1]
+res[i][j]: Math.min{insert, delete, replace}. 
 */
  
 public class EditDistance {
