@@ -9,6 +9,7 @@
 */
 
 /*
+solution 1:
 复杂度
 时间：O(len1*len2) 空间O(len1*len2), where len1 = s1.length() and len2 = s2.length().
 
@@ -48,3 +49,28 @@ public class EditDistance {
 		return res[len1][len2];
 	}
 }
+
+/*
+solution 2:
+solution 1　＋ 滚动数组
+*/
+
+public class EditDistance {
+	public int minDistance(String word1, String word2) {
+	  if (word1.length() == 0) return word2.length();
+		if (word2.length() == 0) return word1.length();
+		 int len1 = words1.length();
+		 int len2 = words2.length();
+		 int[] res = new int[len2+1];
+		 
+	}
+}
+
+
+
+
+
+
+
+
+

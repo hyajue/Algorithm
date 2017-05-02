@@ -10,7 +10,9 @@
 classic DP problem
 solution 1: 
 复杂度:
-时间O(n) 空间O(n) 
+时间：O(n) 空间：O(n) 
+
+思路：dp
 */
 public class ClimbingStairs {
   public int climbStairs(int n) {
@@ -27,8 +29,10 @@ public class ClimbingStairs {
 
 /*
 solution 2: 
-复杂度:
-时间O(n) 空间O(1) 
+复杂度
+时间：O(n) 空间：O(1) 
+
+思路：dp+滚动数组
 由递推式可知每次循环中只需要往前看两个状态便可算出新的结果 故不需要数组来保存状态了
 用两个变量即可
 */
