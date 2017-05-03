@@ -59,10 +59,26 @@ public class EditDistance {
 	public int minDistance(String word1, String word2) {
 	  if (word1.length() == 0) return word2.length();
 		if (word2.length() == 0) return word1.length();
-		 int len1 = words1.length();
-		 int len2 = words2.length();
-		 int[] res = new int[len2+1];
-		 
+		  int len1 = words1.length();
+		  int len2 = words2.length();
+		  int[] res = new int[len2+1];
+		  for (int j = 1; j <= len2; j++) {
+			  res[j] = j; 
+		  }
+			for (int i = 1; i <= len1; i++) {
+				for (int j = 1; j <= len2; j++) {
+					int prev = res[j-1];
+					int ist = res[j-1] + 1;
+					int del = res[j] + 1;
+					int rep = 0;
+					if (word1.charAt(i) == word2.charAt(j)) {
+						rep = prev;
+					} else {
+						rep = prev + 1;
+					}
+					res[j] = Math.min(ist, Math.min(del, rep));
+				}
+			}
 	}
 }
 
