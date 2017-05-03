@@ -9,6 +9,10 @@
 */
 
 /*
+复杂度
+时间O:(n) 空间O(1)
+
+思路：
 maintain a counter: 
 	when current item == last item, counter++
 	skip current item if counter >= 3: item already repeats two times 
@@ -16,25 +20,22 @@ maintain a counter:
 */
 
 public class RemoveDuplicatesFromSortedArrayII {
-    public int removeDuplicates(int[] nums) {
-        if (nums == null || nums.length == 0) {
-			return 0;
-		}
-		int idx = 0;
-		int count = 0;
-		for (int i = 0; i < nums.length; i++) {
-			if (i > 0 && nums[i] == nums[i-1]) {
-				count++; 
-				if (count >= 3) { // repeat more than 2 times
-					continue;
-				}
-			}
-			else { // reset counter if it's a new number 
-				count = 1;
-			}
-			// update input array and item number  
-			nums[idx++] = nums[i];
-		}
-		return idx;
-    }
+	public int removeDuplicates(int[] nums) {
+		if (nums == null || nums.length == 0) return 0;
+	  int idx = 0;
+	  int count = 0;
+	  for (int i = 0; i < nums.length; i++) {
+		  if (i > 0 && nums[i] == nums[i-1]) {
+		  	count++; 
+		  	if (count >= 3) { // repeat more than 2 times
+		  		continue;
+		  	}
+		  } else { // reset counter if it's a new number 
+		  	count = 1;
+		  }
+		  // update input array and item number  
+		  nums[idx++] = nums[i];
+	  }
+	  return idx;
+  }
 } 
