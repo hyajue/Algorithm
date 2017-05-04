@@ -18,10 +18,15 @@
  */
 
 /*
-比较直接容易想到的方法，就是用一个hashset，然后把扫过的结点放入hashset中，如果出现重复则返回true S(n) = O(n)
-考虑如何不用额外空间来判断是否有cycle，用很典型的快慢方法，基本想法就是维护两个指针，一个走的快，一个走得慢，
-当一个走到链表尾或者两个相见的时候，能得到某个想要的结点，比如相遇点，中点等
-假设两个指针faster和slower slower一倍速移动，faster两倍速移动 有一个链表，假设他在cycle开始前有a个结点，
+复杂度
+时间：O(n) 空间:O(1)
+
+思路：
+比较直接容易想到的方法，是用一个hashset，然后把扫过的结点放入hashset中，如果出现重复则返回true -> S(n) = O(n)
+
+如何不用额外空间来判断是否有cycle，用很典型的快慢指针大法。基本想法就是维护两个指针，一个走的快，一个走得慢，
+当一个走到链表尾或者两个相遇时，能得到某个想要的结点，比如相遇点，中点等
+假设两个指针fast和slow slow一倍速移动，fast两倍速移动 有一个链表，假设在cycle开始前有a个结点，
 cycle长度是c，而我们相遇的点在cycle开始后b个结点。那么想要两个指针相遇，意味着要满足以下条件：
 (1) a+b+mc=s; (2) a+b+nc=2s; 其中s是指针走过的步数，m和n是两个常数。
 这里面还有一个隐含的条件，就是s必须大于等于a，否则还没走到cycle里面，两个指针不可能相遇。假设k是最小的整数使得a<=kc，
@@ -34,15 +39,16 @@ cycle长度是c，而我们相遇的点在cycle开始后b个结点。那么想�
 public class LinkedListCycle {
   public boolean hasCycle(ListNode head) {
     if (head == null) return false;
-	ListNode faster = head;
-	ListNode slower = head;
-	while(faster != null && faster.next != null) {
-	  faster = faster.next.next;
-	  slower = slower.next;
-	  if(faster == slower) {
-	    return true;
+	  ListNode fast = head;
+	  ListNode slow = head;
+	  //由于fast每次走两步,所以要判断fast.next非空,但fast.next能执行的前提是fast!=null
+		while(fast != null && fast.next != null) {
+	    fast = fast.next.next;
+	    slow = slow.next;
+	    if(fast == slow) {
+	      return true;
+	    }
 	  }
-	}
-	return false;
+	  return false;
   }
 }

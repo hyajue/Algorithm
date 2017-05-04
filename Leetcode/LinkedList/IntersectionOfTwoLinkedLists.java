@@ -5,9 +5,9 @@
 * For example, the following two linked lists:
 * 
 * A:          a1 → a2
-*                    ↘
+*                    ->
 *                      c1 → c2 → c3
-*                    ↗            
+*                    ->            
 * B:     b1 → b2 → b3
 * begin to intersect at node c1.
 * 
@@ -40,6 +40,10 @@
 两个指针分别从两个链表头出发 依次每次走一步 无论谁走到null 下一个开始走另一个的开头 
 相遇时，有：
 LenA + LenShare + LenB = LenB + LenShare + LenA 
+  lenA    LenShare
+<------>|<-------->
+   <--->|<-------->
+	 LenB   LenShare 
 由于循环结束的条件为两指针相遇 故一定在交点处相遇 
 */ 
  
