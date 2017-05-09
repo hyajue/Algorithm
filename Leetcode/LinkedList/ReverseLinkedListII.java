@@ -36,16 +36,16 @@ public class ReverseLinkedListII {
 		if (head == null || head.next == null) return head;
     ListNode dummy = new ListNode(0);
     dummy.next = head;
-		head = dummy;
-		// move head to the node before target starting point
+		ListNode cur = dummy;
+		// move cur to the node before target starting point
 		// move m-1 steps
-		for (int i = 1; i < m; i++) {
-			head = head.next;
+		for (int i = 0; i < m-1; i++) {
+			cur = cur.next;
 		}
-		ListNode subHead = head.next;
-		ListNode prevSubHead = head;
-		ListNode ptr1 = head.next;
-		ListNode ptr2 = head.next.next;
+		ListNode subHead = cur.next;
+		ListNode prevSubHead = cur;
+		ListNode ptr1 = cur.next;
+		ListNode ptr2 = cur.next.next;
 		for (int i = m; i < n; i++) {
 		  ListNode p2Next = ptr2.next;
 			ptr2.next = ptr1;

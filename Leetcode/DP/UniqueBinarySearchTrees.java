@@ -20,12 +20,7 @@
 所以任选一个值为根，然后把剩下的集合分成了左右子树->构建子问题
 以该选取节点作为根的二叉树的数量=左子树可能的数量*右子树可能的数量
 因此，维护一个数组res，res[i]表示有i个节点的二叉查找树的数量 
-
-公式：
-C_n+1 = Sigma(i->[0,n]){C_i * C_n-i}, n >= 0; where C_0 = 1.
-
-这道题其实是卡特兰数的一种应用(高中数学中的数列问题 给定初始条件和递推式) 
-卡特兰数在其他方面的题目也有不少应用 
+对于有n个节点的BST,左边有i个节点,右边就有n-1-i个节点
 */
  
 public class UniqueBinarySearchTrees {
@@ -35,6 +30,7 @@ public class UniqueBinarySearchTrees {
 		res[0] = 1;
 		res[1] = 1;
 		for (int i = 2; i <= n; i++) {
+			//left subtree has j nodes: j->[0,i)
 			for (int j = 0; j < i; j++) {
 				res[i] += res[j] * res[i-j-1];
 			}
