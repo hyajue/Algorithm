@@ -31,15 +31,15 @@ public class GrayCode {
   public List<Integer> grayCode(int n) {
     List<Integer> res = new ArrayList<Integer>();
     res.add(0);
-	for (int i = 0; i < n; i++){
-	  int hiBit = 1 << i;
-	  int len = res.size();
-	  for (int j = len - 1; j >= 0; j--) {
-		int curNum = res.get(j);
-		curNum += hiBit; 
-		res.add(curNum);
+	  for (int i = 0; i < n; i++){
+	    int hiBit = 1 << i;
+	    int len = res.size();
+	    for (int j = len - 1; j >= 0; j--) {
+		    int curNum = res.get(j);
+		    curNum += hiBit; 
+		    res.add(curNum);
+	    }
 	  }
-	}
-	return res;
+	  return res;
   }
 }

@@ -22,15 +22,14 @@ classic NP problem: find all subset
 */
 
 public class SubsetsII {
-    public List<List<Integer>> subsetsWithDup(int[] nums) {
-        if (nums == null) {
-			return null;
-		}
-		Arrays.sort(nums);
-		List<Integer> lastSet = new ArrayList<Integer>();
-		lastSet.add(0);
-		return findSubSets(nums, nums.length-1, lastSet);
-    }
+  public List<List<Integer>> subsetsWithDup(int[] nums) {
+    if (nums == null) return null;
+    Arrays.sort(nums);
+    List<Integer> lastSet = new ArrayList<Integer>();
+    lastSet.add(0);
+    return findSubSets(nums, nums.length-1, lastSet);
+  }
+	
 	private List<List<Integer>> findSubSets(int[] nums, int index, List<Integer> lastSet) {
 		if (index == -1) {
 			List<List<Integer>> res = new ArrayList<List<Integer>>();
