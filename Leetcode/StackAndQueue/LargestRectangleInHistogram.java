@@ -12,6 +12,70 @@
 * return 10.
 */
 
+/*
+复杂度
+时间：O(n) 空间：O(n) 
+
+思路：栈法
+   
+*/
+public class LargestRectangleInHistogram {
+  public int largestRectangleArea(int[] heights) {
+    if (heights == null || heights.length == 0) return 0;
+    Stack<Integer> stack = new Stack<Integer>();
+		int maxArea = 0;
+		for (int i = 0; i < heights.length; i++) {
+	    while (!stack.isEmpty() && heights[i] <= heights[stack.peek()]) {
+				int height = heights[stack.pop()];
+				int width = stack.isEmpty() ? i : i-stack.peek()-1; 
+				maxArea = Math.max(maxArea, height*width);
+			}		
+		}		
+  }
+}
+
+
+
+     2  3  2  
+idx  0  1  2  3 
+
+
+stack:
+             2: 1
+3: 0
+
+
+
+h = 3; 
+w = 1; area = 3 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 public class LargestRectangleInHistogram {
