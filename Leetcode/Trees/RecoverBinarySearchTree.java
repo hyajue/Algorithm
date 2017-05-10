@@ -19,25 +19,30 @@
 
 /* 
 solution 1:
-递归中序遍历，保存三个指针：两个是要被交换的节点first、second，一个是当前遍历到结点的前序节点pre 
+复杂度
+时间：O(n) 空间：O(logN)
+
+思路：
+递归中序遍历,维护三个指针：两个是要被交换的节点first,second，一个是当前遍历到结点的前序节点pre 
 如果当前遍历到的前序节点值大于等于当前节点则该节点存在问题，需要交换
 注意如果是发现的第一个有问题的节点，那么需要交换的节点为pre；如果是第二次发现的有问题的节点，
 那么需要被交换的节点是当前节点cur。
 这个解法比较concise 其空间复杂度是O(logN) 因为是递归 
 */ 
 
- public class RecoverBinarySearchTree {
-    TreeNode firstNode = null;
+public class RecoverBinarySearchTree {
+  TreeNode firstNode = null;
 	TreeNode secNode = null;
 	TreeNode preNode = new TreeNode(Integer.MIN_VALUE);
 	public void recoverTree(TreeNode root) {
-        if (root == null) return;
+    if (root == null) return;
 		inOrder(root);
 		int tmp = firstNode.val;
 		firstNode.val = secNode.val;
 		secNode.val = tmp;
 		return;
 	}
+	
 	private void inOrder(TreeNode root) {
 		if (root == null) return;
 		inOrder(root.left);
@@ -68,7 +73,7 @@ Morris Traversal: 线索二叉树
 3. 重复以上1、2直到当前节点为空。
 */
 
- public class RecoverBinarySearchTree {
+public class RecoverBinarySearchTree {
 	public void recoverTree(TreeNode root) {
 		if (root == null) return;
 		TreeNode pre = null;
@@ -106,15 +111,3 @@ Morris Traversal: 线索二叉树
 		secNode.val = tmp;
 	}
 } 
-
-
-
-
-
-
-
-
-
-
-
-
