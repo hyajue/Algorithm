@@ -27,8 +27,12 @@
  */
  
 /*
-二叉树的广度优先遍历使用队列非常容易实现，这道题要求的是蛇形遍历，我们可以发现奇数行的遍历仍然可以按照广度优先遍历的方式实现，
-而对于偶数行，只要翻转一下就好了。
+复杂度
+时间：O(n) 空间：O(n)
+
+思路：BFS
+使用队列实现蛇形遍历，发现奇数行的遍历仍然可以按照广度优先遍历的方式实现，
+而对于偶数行，只需要翻转一下
 */
  
 public class BinaryTreeZigzagLevelOrderTraversal {
@@ -39,24 +43,24 @@ public class BinaryTreeZigzagLevelOrderTraversal {
     Queue<TreeNode> queue = new LinkedList<TreeNode>();
     queue.offer(root);
     while(!queue.isEmpty()) { 
-	  // level order traversal
+	    // level order traversal
       int queueLen = queue.size();
       List<Integer> level = new ArrayList<Integer>();
       for(int i = 0; i < queueLen; i++) {
-		TreeNode node = queue.poll();
-		level.add(node.val);
-		if(node.left != null) queue.offer(node.left);
-		if(node.right != null) queue.offer(node.right);
-	  }
+		    TreeNode node = queue.poll();
+		    level.add(node.val);
+		    if(node.left != null) queue.offer(node.left);
+		    if(node.right != null) queue.offer(node.right);
+	    }
       // reverse the even level of list
       if(odd) {
-		res.add(level);
-	  } else {
-		  Collections.reverse(level);
-          res.add(level);		  
-	  }	  
-	  odd = !odd;
-	}
+		    res.add(level);
+	    } else {
+		    Collections.reverse(level);
+        res.add(level);		  
+	    }	  
+	    odd = !odd;
+	  }
     return res;    
   }
 } 
