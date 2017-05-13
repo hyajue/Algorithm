@@ -11,7 +11,6 @@
 *      2   3
 * Return 6.
 */
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -24,6 +23,10 @@
  
 /*
 solution 1:
+复杂度
+时间：O(n) 空间：O(logn)
+
+思路：
 这道题是求树的路径和的题目，不过和平常不同的是这里的路径不仅可以从根到某一个结点，而且路径可以从左子树某一个结点，然后到达右子树的结点，
 就像题目中所说的可以起始和终结于任何结点。在这里树没有被看成有向图，而是被当成无向图来寻找路径。因为这个路径的灵活性，我们需要对递归返回值进行一些调整，
 而不是通常的返回要求的结果。在这里，函数的返回值定义为以自己为根的一条从根到子结点的最长路径（这里路径就不是当成无向图了，必须往单方向走）。
@@ -35,22 +38,23 @@ solution 1:
 */
  
 public class BinaryTreeMaximumPathSum {
-    public int maxPathSum(TreeNode root) {
-        if (root == null) {
-			return 0;
-		}
-		List<Integer> res = new ArrayList<Integer>();
-		res.add(Integer.MIN_VALUE);
-		helper(root, res);
-		return res.get(0);
+  public int maxPathSum(TreeNode root) {
+    if (root == null) {
+  	  return 0;
     }
+    List<Integer> res = new ArrayList<Integer>();
+    res.add(Integer.MIN_VALUE);
+    helper(root, res);
+    return res.get(0);
+  }
+	
 	private int helper(TreeNode root, List<Integer> res) {
 		if (root == null) {
 			return 0;
 		}
 		int left = helper(root.left, res);
 		int right = helper(root.right, res);
-		int cur = root.val + (left > 0 ? left:0) + + (right > 0 ? right:0);
+		int cur = root.val + (left > 0 ? left:0) + (right > 0 ? right:0);
 		if (cur > res.get(0)) {
 			res.set(0, cur);
 		}
@@ -73,16 +77,17 @@ maxPath函数表示当前节点能够组成的最大 path sum，注意，不一�
 */
 
 public class BinaryTreeMaximumPathSum {
-    private int maxSum = Integer.MIN_VALUE;
+  private int maxSum = Integer.MIN_VALUE;
+	
 	public int maxPathSum(TreeNode root) {
-        if (root == null) {
-			return 0;
-		}
-		helper(root);
-		return 
-    }
+    if (root == null) {
+		  return 0;
+	  }
+	  return helper(root); 
+  }
+	
 	private int helper(TreeNode root) {
-        if (root == null) {
+    if (root == null) {
 			return 0;
 		} 
 		int left = helper(root.left);
@@ -134,17 +139,3 @@ public class BinaryTreeMaximumPathSum {
 		return maxThisToParent;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

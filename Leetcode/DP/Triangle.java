@@ -53,20 +53,20 @@ solution 2:
 public class Triangle {
   public int minimumTotal(List<List<Integer>> triangle) {
     if (triangle == null || triangle.size() == 0) {
-	  return 0;
-	}  
-	int row = triangle.size();
-	int col = row;
-	int[] res = new int[col];
-	for (int j = 0; j < col; j++) {
-	  res[j] = triangle.get(row-1).get(j);
-	}
-	for (int i = row - 2; i >= 0; i--) {
-	  for (int j = 0; j <= i; j++) {
-	    res[j] = Math.min(res[j], res[j+1]) + triangle.get(i).get(j);
+	    return 0;
 	  }  
-	}
-	return res[0];
+	  int row = triangle.size();
+	  int col = row;
+	  int[] res = new int[col];
+	  for (int j = 0; j < col; j++) {
+	    res[j] = triangle.get(row-1).get(j);
+	  }
+	  for (int i = row - 2; i >= 0; i--) {
+	    for (int j = 0; j <= i; j++) {
+	      res[j] = Math.min(res[j], res[j+1]) + triangle.get(i).get(j);
+	    }  
+	  }
+	  return res[0];
   }	
 } 
 
@@ -76,10 +76,3 @@ solution 3:
 时间(n^2) 空间(1)
 基于solution 2. 如果输入数据允许修改 则可以利用输入矩阵的最后一行做in place的更新
 */
-
-
-
-
-
-
-
