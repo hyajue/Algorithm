@@ -20,7 +20,6 @@
 *      / \    \
 *     4-> 5 -> 7 -> NULL
 */
-
 /**
  * Definition for binary tree with next pointer.
  * public class TreeLinkNode {
@@ -30,41 +29,44 @@
  * }
  */
 
-/* 
-由于条件变成任一二叉树 所以采用层序遍历法解决 T(n) = O(n)
+/*
+复杂度
+时间：O(n) 空间：O(1)
+
+思路：BFS 
+由于条件变成任一二叉树 所以采用层序遍历法解决
 */
+
 public class PopulatingNextRightPointersInEachNodeII {
   public void connect(TreeLinkNode root) {
-    if (root == null) {
-		return;
-	}
-	TreeLinkNode curNode = root; // current level node
-	TreeLinkNode nextLevelHead = null;  // next level head node
-	TreeLinkNode prev = null;  // next level next node 
-	while (curNode != null) {
+    if (root == null) return;
+	  TreeLinkNode curNode = root; // current level node
+	  TreeLinkNode nextLevelHead = null;  // next level head node
+	  TreeLinkNode prev = null;  // next level next node 
 	  while (curNode != null) {
-		if (curNode.left != null) {
-		  if (prev != null) {
-			prev.next = curNode.left;  
-		  } else {
-			  nextLevelHead = curNode.left;
-		  }
-		    prev = curNode.left;	
-		}
-		if (curNode.right != null) {
-		  if (prev != null) {
-		    prev.next = curNode.right;  
-		  } else {
-			  nextLevelHead = curNode.right;
-		  }
-		  prev = curNode.right;
-		}
-		curNode = curNode.next;
+	    while (curNode != null) {
+		    if (curNode.left != null) {
+		      if (prev != null) {
+			      prev.next = curNode.left;  
+		      } else {
+			      nextLevelHead = curNode.left;
+		      }
+		      prev = curNode.left;	
+		    }
+		    if (curNode.right != null) {
+		      if (prev != null) {
+		        prev.next = curNode.right;  
+		      } else {
+			      nextLevelHead = curNode.right;
+		      }
+		      prev = curNode.right;
+		    }
+		    curNode = curNode.next;
+	    }
+	    // move to next level 
+	    curNode = nextLevelHead;
+	    nextLevelHead = null;
+	    prev = null;
 	  }
-	  // move to next level 
-	  curNode = nextLevelHead;
-	  nextLevelHead = null;
-	  prev = null;
-	}
   }
 }
