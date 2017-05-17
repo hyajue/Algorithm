@@ -38,7 +38,7 @@
 偶数则加入n1的结点，n1后移；否则加入n2的结点，n2后移。
 每加入一个结点后，cur后移。最后若n1或n2有剩余结点，则加入cur.next。返回dummy.next。
 */
- 
+
 public class ReorderList {
   public void reorderList(ListNode head) {
     if (head == null || head.next == null) return;
@@ -71,7 +71,7 @@ public class ReorderList {
 		ListNode dummy = new ListNode(0);
 		ListNode cur = dummy;
 		while (n1 != null && n2 != null) {
-			if (idx %2 == 0) {
+			if (idx % 2 == 0) {
 				cur.next = n1;
 				n1 = n1.next;
 			} else {
