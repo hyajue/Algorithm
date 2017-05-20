@@ -16,33 +16,33 @@ time: O(n), space: O(n)
 public class LongestSubstringWithAtMostTwoDistinctCharacters {
   public int lengthOfLongestSubstringTwoDistinct(String s) {
     if(s == null || s.length() == 0) return 0;
-	Map<Character, Integer> map = new HashMap<Character, Integer>();
-	int left = 0;
-	int maxLen = 0;
-	for (int i = 0; i < s.length(); i++) {
-	  //update map based on current pointer i
-	  char c = s.charAt(i);
-	  if (!map.containsKey(c)) {
-	    map.put(c, 1);
-	  } else {
-		  map.put(c, map.get(c)+1);
-	  }
+	  Map<Character, Integer> map = new HashMap<Character, Integer>();
+	  int left = 0;
+	  int maxLen = 0;
+	  for (int i = 0; i < s.length(); i++) {
+	    //update map based on current pointer i
+	    char c = s.charAt(i);
+	    if (!map.containsKey(c)) {
+	      map.put(c, 1);
+	    } else {
+		    map.put(c, map.get(c)+1);
+	    }
 	  
-	  // move left pointer until number of Character in map is less or equal to k
-	  while (map.size() > k) {
-	    char leftChar = s.charAt(left);
-		if (map.containsKey(leftChar)) {
-		  // note that there may have duplicatins, so decrease the freq of this Char
-		  // to zero before remove this Char 
-		  map.put(leftChar, map.get(leftChar)-1);
-		  if (map.get(leftChar) == 0) {
-			map.remove(leftChar);
-		  }
-		}
-		left++;
+	    // move left pointer until number of Character in map is less or equal to k
+	    while (map.size() > k) {
+	      char leftChar = s.charAt(left);
+		    if (map.containsKey(leftChar)) {
+		    // note that there may have duplications, so decrease the freq of this Char
+		    // to zero before remove this Char 
+		      map.put(leftChar, map.get(leftChar)-1);
+		      if (map.get(leftChar) == 0) {
+			      map.remove(leftChar);
+		      }
+		    }
+		    left++;
+	    }
+	    maxLen = Math.max(maxLen, i-left+1);
 	  }
-	  maxLen = Math.max(maxLen, i-left+1);
-	}
-	return maxLen;
+	  return maxLen;
   }
 }

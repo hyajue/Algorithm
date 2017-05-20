@@ -14,7 +14,7 @@
 
 思路：桶排序
 这题要求O（N）的时间和空间复杂度，显然不能使用quick sort，merge sort， heap sort这类基于比较的排序算法，因为是O（Nlog（N））的时间复杂度。
-于是考虑使用bukit sort，radix sort，counting sort的思路->这里选择桶排序
+于是考虑使用bucket sort，radix sort，counting sort的思路->这里选择桶排序
 假设num数组中最大值和最小值为max和min，那么我们可以令每个桶的大小为bukitLength = Math.ceil((max - min) / (double) len)，
 定义(max -  min) / bukitLength  + 1个桶，就可以保证存下从min到max这个range内的所有值
 桶定义好之后，就可以根据元素大小放入桶中。注意max gap不可能存在于同一个桶的元素之间，因为同一个桶的元素之间gap至多只能是bukitLength-1，

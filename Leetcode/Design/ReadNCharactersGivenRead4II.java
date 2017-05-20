@@ -20,7 +20,7 @@
 用Queue保存之前多读的character。每次读时，先看Queue里的够不够，如果不够，先读到够为止
 */
 	
-	public class ReadNCharactersGivenRead4II extends Reader4 {  
+public class ReadNCharactersGivenRead4II extends Reader4 {  
   /** 
    * @param buf Destination buffer 
    * @param n   Maximum number of characters to read 
