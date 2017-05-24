@@ -38,37 +38,34 @@ O(1)的插入删除明显考虑用hash set或map，set存没法getRandom，则�
 简单的，我们让最后元素填补到被删除元素的位置，使得key空间连续。
 */
 
-
 public class RandomizedSet {
 
 	private List<Integer> vals;
 	private Map<Integer, Integer> valToIdx;
 
     /** Initialize your data structure here. */
-    public RandomizedSet() {
-        vals = new ArrayList<Integer>();
+  public RandomizedSet() {
+    vals = new ArrayList<Integer>();
 		valToIdx = new HashMap<Integer, Integer>();
-    }
+  }
     
-    /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
-    public boolean insert(int val) {
-        if (valToIdx.containsKey(val)) {
+  /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+  public boolean insert(int val) {
+    if (valToIdx.containsKey(val)) {
 			return false;
-		}
-		else {
+	  } else {
 			valToIdx.put(val, valToIdx.size());
 			vals.add(val);
 			return true;
 		}
-    }
+  }
     
-    /** Removes a value from the set. Returns true if the set contained the specified element. */
-    public boolean remove(int val) {
-        if (!valToIdx.containsKey(val)) {
+  /** Removes a value from the set. Returns true if the set contained the specified element. */
+  public boolean remove(int val) {
+    if (!valToIdx.containsKey(val)) {
 			return false;
-		}
-		else {
-			// V =HashMap.remove(K)
+		} else {
+			// V = HashMap.remove(K)
 			int idx = valToIdx.remove(val);
 			if (idx < vals.size() - 1) {    // if it's not the last item
 				// put the last item on the index of removed item 
@@ -78,13 +75,13 @@ public class RandomizedSet {
 			vals.remove(vals.size()-1);
 			return true;
 		}
-    }
+  }
     
     /** Get a random element from the set. */
-    public int getRandom() {
-        Random rdm = new Random();
+  public int getRandom() {
+    Random rdm = new Random();
 		return vals.get(rdm.nextInt(vals.size()));
-    }
+  }
 }
 
 /**
@@ -93,20 +90,4 @@ public class RandomizedSet {
  * boolean param_1 = obj.insert(val);
  * boolean param_2 = obj.remove(val);
  * int param_3 = obj.getRandom();
- */ 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ */
