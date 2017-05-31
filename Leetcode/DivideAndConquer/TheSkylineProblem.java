@@ -55,8 +55,8 @@ public class TheSkylineProblem {
 			pos.add(new int[]{point[0], -point[2]});
       pos.add(new int[]{point[1], point[2]});			
 		}
-    // sort posititons as acending order of x-coordinate
-    // if same x-coordinate, sort as acending order of y-coordinate 
+    // sort positions as ascending order of x-coordinate
+    // if same x-coordinate, sort as ascending order of y-coordinate 
     Collections.sort(pos, new Comparator<int[]>(){
 		  @Override
       public int compare(int[] point1, int[] point2) {
