@@ -16,7 +16,7 @@ first pass to calculate res[i]: the product from [0->i)
 
 second pass to calculate res[i]:the product from (i->nums.length-1] 
 
-maintain one array res[] and two vairiable to store product left/right 
+maintain one array res[] and two vairiables to store product left/right 
 */
 
 public class ProductOfArrayExceptSelf {
@@ -26,14 +26,14 @@ public class ProductOfArrayExceptSelf {
     int[] res = new int[len];
     int left = 1;
     for (int i = 0; i < len; i++) {
-	  res[i] = left;
-	  left *= nums[i];
-	}
+	    res[i] = left;
+	    left *= nums[i];
+	  }
     int right = 1;
     for (int i = len-1; i >= 0; i--) {
-	  res[i] *= right;
+	    res[i] *= right;
       right *= nums[i];	  
-	}
+	  }
     return res;    
   }
 } 

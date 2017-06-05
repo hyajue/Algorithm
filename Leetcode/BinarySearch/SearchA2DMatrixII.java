@@ -36,17 +36,17 @@ public class SearchA2DMatrixII {
     int i = 0;
     int j = matrix[0].length - 1;
     while(i < matrix.length && j >= 0) {
-	  int item = matrix[i][j];
-	  if (item == target) {
-	    return true;
-	  // move left if larger than target 
-	  } else if (item > target) {
-		j--;
-	  // move down if smaller than target
-	  } else {
-		i++;
+	    int item = matrix[i][j];
+	    if (item == target) {
+	      return true;
+	    // move left if larger than target 
+	    } else if (item > target) {
+		    j--;
+	    // move down if smaller than target
+	    } else {
+		   i++;
+	    }
 	  }
-	}
-	return false;
+	  return false;
   }
 } 
