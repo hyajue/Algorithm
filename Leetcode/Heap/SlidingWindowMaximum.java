@@ -63,7 +63,7 @@ public class SlidingWindowMaximum {
     int[] res = new int[nums.length-k+1];
     for (int i = 0; i < nums.length; i++) {
 			//每次将属于当前窗口的元素都移除
-			if (!deque.isEmpty() && deque.peek() <= i - k) {
+			while (!deque.isEmpty() && deque.peek() <= i - k) {
 				deque.poll();
 			}
 			//队尾的元素必须比目前元素大,否则就一直出队到满足条件
