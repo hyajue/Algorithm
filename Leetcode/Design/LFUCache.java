@@ -52,7 +52,7 @@ public class LFUCache {
 				} else {
 					return item1.lastUsedTime - item2.lastUsedTime;
 				}
-			} 	
+			}
 		});    
   }
   
