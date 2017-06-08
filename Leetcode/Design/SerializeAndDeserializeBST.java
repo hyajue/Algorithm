@@ -97,7 +97,7 @@ public class Codec {
     TreeNode root = new TreeNode(Integer.parseInt(numbers[0]));  
     TreeNode iteratorNode = root;  
     Stack<TreeNode> stack = new Stack<TreeNode>();  
-    for(int i = 1; i < numbers.length; i ++){  
+    for(int i = 1; i < numbers.length; i++){  
       TreeNode node = new TreeNode(Integer.parseInt(numbers[i]));  
       if (node.val < iteratorNode.val) {
 				iteratorNode.left = node;stack.push(iteratorNode);
