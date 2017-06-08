@@ -17,39 +17,38 @@ public class MajorityElementII {
     List<Integer> res = new ArrayList<Integer>();
     if(nums.length == 0 || nums == null) return res;
     int cnt1 = 0;
-	int cnt2 = 0;
-	int item1 = nums[0];
-	int item2 = nums[0];
-	for (int i = 0; i < nums.length; i++) {
-	  // if nums[i] equals one of items, then increment corresponding counter
-	  if (nums[i] == item1) {
-		cnt1++;
-	  } else if(nums[i] == item2) {
-		cnt2++;
-	  // if neither of items equals nums[i], decrement bother counter 
-	  } else if(cnt1 != 0 && cnt2 != 0) {
-		cnt1--;
-		cnt2--;
-	  // if one of counter is 0, then update cooresponding item
-	  } else {
-		  if(cnt1 == 0) {
-			item1 = nums[i];
-			cnt1 = 1;
-		  } else {
-			item2 = nums[i];
-			cnt2 = 1;
-		  }
+	  int cnt2 = 0;
+	  int item1 = nums[0];
+	  int item2 = nums[0];
+	  for (int i = 0; i < nums.length; i++) {
+	    // if nums[i] equals one of items, then increment corresponding counter
+	    if (nums[i] == item1) {
+	  	  cnt1++;
+	    } else if(nums[i] == item2) {
+	  	  cnt2++;
+	    // if neither of items equals nums[i], decrement bother counter 
+	    } else if(cnt1 != 0 && cnt2 != 0) {
+	  	  cnt1--;
+	  	  cnt2--;
+	    // if one of counter is 0, then update cooresponding item
+	    } else {
+	  	  if(cnt1 == 0) {
+	  		  item1 = nums[i];
+	  		  cnt1 = 1;
+	  	  } else {
+	  		  item2 = nums[i];
+	  		  cnt2 = 1;
+	  	  }
+	    }
 	  }
-	}
-	cnt1 = 0;
-	cnt2 = 0;
-	for (int i = 0; i < nums.length; i++) {
-	  if (nums[i] == item1) cnt1++;
-	  if (nums[i] == item2) cnt2++;
-	}
-	if (cnt1 > nums.length / 3) res.add(item1);
-	if (cnt2 > nums.length / 3 && item2 != item1) res.add(item2);
-	return res;
+	  cnt1 = 0;
+	  cnt2 = 0;
+	  for (int i = 0; i < nums.length; i++) {
+	    if (nums[i] == item1) cnt1++;
+	    if (nums[i] == item2) cnt2++;
+	  }
+	  if (cnt1 > nums.length / 3) res.add(item1);
+	  if (cnt2 > nums.length / 3 && item2 != item1) res.add(item2);
+	  return res;
   }
 }
-

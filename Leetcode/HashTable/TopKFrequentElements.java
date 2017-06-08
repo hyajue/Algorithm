@@ -24,49 +24,34 @@ step4.排序完成后，编号大的桶中元素出现的频次高，因此，�
 我们将当前桶的元素取尽（同一个桶中元素出现的频次相等）,然后停止取数据
 */
 
-
 public class TopKFrequentElements {
-    public List<Integer> topKFrequent(int[] nums, int k) {
+  public List<Integer> topKFrequent(int[] nums, int k) {
         // step 1
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		for (int num : nums) {
-			if (map.containsKey(num)) {
-				map.put(num, map.get(num)+1);
-			}
-			else {
-				map.put(num, 1);
-			}
-		}
-		// step 2 & 3 
-		List<Integer>[] bucket = new List[nums.length+1]; // create buckets
-		for (int key : map.keySet()) {
-			int count = map.get(key); 
-			if (bucket[count] == null) {
-				bucket[count] = new ArrayList<Integer>();
-			}
-			bucket[count].add(key);
-		}
-		// step 4
-		List<Integer> res = new ArrayList<Integer>();
-		for (int i = nums.length; i > 0; i--) {
-			if (bucket[i] != null && res.size() < k) {
-				res.addAll(bucket[i]);
-			}
-		}
-		return res;
+    Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+    for (int num : nums) {
+    	if (map.containsKey(num)) {
+    		map.put(num, map.get(num)+1);
+    	}
+    	else {
+    		map.put(num, 1);
+    	}
     }
+    // step 2 & 3 
+    List<Integer>[] bucket = new List[nums.length+1]; // create buckets
+    for (int key : map.keySet()) {
+    	int count = map.get(key); 
+    	if (bucket[count] == null) {
+    		bucket[count] = new ArrayList<Integer>();
+    	}
+    	bucket[count].add(key);
+    }
+    // step 4
+    List<Integer> res = new ArrayList<Integer>();
+    for (int i = nums.length; i > 0; i--) {
+    	if (bucket[i] != null && res.size() < k) {
+    		res.addAll(bucket[i]);
+    	}
+    }
+    return res;
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
