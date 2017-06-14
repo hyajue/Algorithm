@@ -40,8 +40,8 @@ public class BestMeetingPoint {
 			}
 		}
 		int minDis = 0;
-		// calculate disctance from each xCor to middle points
-    // no sorting needed because previously we get xCor based on accending order of i
+		// calculate distance from each xCor to middle points
+    // no sorting needed because previously we get xCor based on ascending order of i
     for (int i = 0; i < xCor.size(); i++) {
 			minDis += Math.abs(xCor.get(i) - xCor.get(xCor.size()/2);
 		} 		

@@ -10,9 +10,9 @@
 复杂度
 时间:O(n) 空间O()
 
-思路：现行扫描
+思路：线性扫描
 maintain a carry. 
-if there's carry at highest bit, then get a new array and make the hightest bit 1.
+if there's carry at highest bit, then get a new array and make the highest bit 1.
 One pass scan -> T(n) = O(n).   
 */
 

@@ -40,33 +40,33 @@ public class GameOfLife {
    for (int i = 0; i < row; i++) {
      for (int j = 0; j < col; j++) {
        // keep track of live neighbor count 
-	   int liveCnt = 0;
-	   for (int k = 0; k < dirs.length; k++) {
-	     int x = i + dirs[k][0];
-		 int y = j + dirs[k][1];
-		 if (x >= 0 && x < row && y >= 0 && y < col) {
-		   // get old state from lower bit
-		   if (board[x][y] % 2 == 1) {
-		     liveCnt++;  
-		   }
-		 }
-	   }
-	   if (board[i][j] % 2 == 1) {
-	     if (liveCnt == 2 || liveCnt == 3) {
-		   board[i][j] += 2;
-		 }
-	   } else {
-		   if (liveCnt == 3) {
-		     board[i][j] += 2;
-		   }
-	    }
-	  }    
-    }
+	     int liveCnt = 0;
+	     for (int k = 0; k < dirs.length; k++) {
+	       int x = i + dirs[k][0];
+		     int y = j + dirs[k][1];
+		     if (x >= 0 && x < row && y >= 0 && y < col) {
+		     // get old state from lower bit
+		       if (board[x][y] % 2 == 1) {
+		         liveCnt++;  
+		       }
+		     }
+	     }
+	     if (board[i][j] % 2 == 1) {
+	       if (liveCnt == 2 || liveCnt == 3) {
+		       board[i][j] += 2;
+		     }
+	     } else {
+		     if (liveCnt == 3) {
+		       board[i][j] += 2;
+		     }
+	     }
+	   }      
+   }
     // update state based on higher bit 
     for (int i = 0; i < row; i++) {
-	  for (int j = 0; j < col; j++) {
-	    board[i][j] >>= 1;
-	  }
-	}	
+	    for (int j = 0; j < col; j++) {
+	      board[i][j] >>= 1;
+	    }
+	  }	
   }
 }

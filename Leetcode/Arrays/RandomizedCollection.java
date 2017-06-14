@@ -44,8 +44,8 @@ public class RandomizedCollection {
   //存储原始数据
   private ArrayList<Integer> list;
   private Random random;
-  //为了排序，控制栈的
-  ArrayList<Integer> tmpForStack;
+  //为了排序，临时放置下标栈的元素
+  private ArrayList<Integer> tmpForStack;
   
   /** Initialize your data structure here. */
   public RandomizedCollection() {
@@ -74,7 +74,7 @@ public class RandomizedCollection {
   
   /** Removes a value from the set. Returns true if the set contained the specified element. */
   /**
-   * 核心思想在于：把删除的元素交换到ArrayList最后一位上，这样就可以O1完成了,
+   * 核心思想在于：把删除的元素交换到ArrayList最后一位上，这样就可以O（1）完成了,
    * 
    * 唯一的一点不同是，要保证在每一个元素对应的位置的栈，要保证其顺序是从小到大，每次出栈的一定是最大的，所以这里交换List后，更新那个元素的栈时需要先把比他大的弹出来，再放回去
    * */

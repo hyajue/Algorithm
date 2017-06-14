@@ -30,7 +30,7 @@ public class MajorityElementII {
 	    } else if(cnt1 != 0 && cnt2 != 0) {
 	  	  cnt1--;
 	  	  cnt2--;
-	    // if one of counter is 0, then update cooresponding item
+	    // if one of counter is 0, then update corresponding item
 	    } else {
 	  	  if(cnt1 == 0) {
 	  		  item1 = nums[i];

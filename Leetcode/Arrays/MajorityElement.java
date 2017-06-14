@@ -44,7 +44,8 @@ public class MajorityElement {
 
 public class MajorityElement {
   public int majorityElement(int[] nums) {
-    int candidate = nums[0], cnt = 0;
+    int candidate = nums[0];
+		int cnt = 0;
     for(int i = 1; i < nums.length; i++){
       if(candidate == nums[i]){
         cnt++;

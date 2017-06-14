@@ -31,29 +31,29 @@ if no overlaps with any curIntervals: insert at end of input list
  * }
  */
 public class InsertInterval {
-    public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
-        List<Interval> res = new ArrayList<Interval>();
-		if (intervals.size() == 0) {
-			res.add(newInterval);
-			return res;
-		}
-		int idx = 0;
-		while (idx < intervals.size() && intervals.get(idx).end < newInterval.start) {
-			res.add(intervals.get(idx));
-			idx++;
-		}
-		if (idx < intervals.size()) {
-			newInterval.start = Math.min(newInterval.start, intervals.get(idx).start);
-		}
-		res.add(newInterval);
-		while (idx < intervals.size() && intervals.get(idx).start <= newInterval.end) {
-			newInterval.end = Math.max(newInterval.end, intervals.get(idx).end);
-			idx++;
-		}
-		while (idx < intervals.size()) {
-			res.add(intervals.get(idx));
-			idx++;
-		}
-		return res;
+  public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+    List<Interval> res = new ArrayList<Interval>();
+    if (intervals.size() == 0) {
+    	res.add(newInterval);
+    	return res;
     }
+    int idx = 0;
+    while (idx < intervals.size() && intervals.get(idx).end < newInterval.start) {
+    	res.add(intervals.get(idx));
+    	idx++;
+    }
+    if (idx < intervals.size()) {
+    	newInterval.start = Math.min(newInterval.start, intervals.get(idx).start);
+    }
+    res.add(newInterval);
+    while (idx < intervals.size() && intervals.get(idx).start <= newInterval.end) {
+    	newInterval.end = Math.max(newInterval.end, intervals.get(idx).end);
+    	idx++;
+    }
+    while (idx < intervals.size()) {
+    	res.add(intervals.get(idx));
+    	idx++;
+    }
+    return res;
+  }
 }
