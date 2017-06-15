@@ -35,33 +35,25 @@
 */ 
  
 public class BinaryTreeLevelOrderTraversalII {
-	public List<List<Integer>> levelOrderBottom(TreeNode root) {
-		List<List<Integer>> res = new ArrayList<List<Integer>>();
-		if (root == null) return res;
-		
-		Queue<TreeNode> queue = new LinkedList<TreeNode>();
-		queue.offer(root);
-		int curLevelNum = 1;
-		int nxtLevelNum = 0;
-		while (curLevelNum != 0) {
-			List<Integer> curLevelRes = new ArrayList<Integer>();
-			nxtLevelNum = 0;
-			while (curLevelNum != 0) {
-				TreeNode curNode = queue.poll();
-				curLevelNum--;
-				curLevelRes.add(curNode.val);
-				if (curNode.left != null) {
-					queue.offer(curNode.left);
-					nxtLevelNum++;
-				}
-				if (curNode.right != null) {
-					queue.offer(curNode.right);
-					nxtLevelNum++;
-				}
-			}
-			res.add(0, curLevelRes);
-			curLevelNum = nxtLevelNum;
-		}
-		return res;
-	}
+  public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
+    ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+    Queue<TreeNode> q = new LinkedList<TreeNode>();
+    if (root == null) return result;
+    q.offer(root);
+    while (!q.isEmpty()) {
+      int size = q.size();
+      ArrayList<Integer> level = new ArrayList<Integer>();
+      for (int i = 0; i < size; i++) {
+        TreeNode cur = q.poll();
+        level.add(cur.val);
+        if (cur.left != null) q.offer(cur.left);
+        if (cur.right != null) q.offer(cur.right);
+      }
+      result.add(0, level);
+      
+    }
+    return result;
+  }
 }
+
+

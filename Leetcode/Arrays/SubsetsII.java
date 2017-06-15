@@ -39,7 +39,6 @@ public class SubsetsII {
 	private void findSubSets(int[] nums, int index, List<Integer> tmp, List<List<Integer>> res) {
 		if (index >= nums.length) {
 			res.add(new ArrayList<Integer>(tmp));
-			return res;
 		}
 		res.add(new ArrayList<Integer>(tmp));
 		for (int i = index; i < nums.length; i++) {
@@ -50,4 +49,5 @@ public class SubsetsII {
 			findSubSets(nums, i+1, tmp, res);
 			tmp.remove(tmp.size()-1);
 		}
+	}
 } 
