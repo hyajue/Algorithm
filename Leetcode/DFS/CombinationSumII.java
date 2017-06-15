@@ -42,7 +42,7 @@ public class CombinationSumII {
 		} 
 		for (int i = start; i < candidates.length; i++) {
 			if (i > start && candidates[i] == candidates[i-1]) continue; // 去重
-				curList.add(candidates[i]);
+			curList.add(candidates[i]);
 			helper(res, curList, candidates, target-candidates[i], i+1);
 			curList.remove(curList.size()-1);
 		}        
