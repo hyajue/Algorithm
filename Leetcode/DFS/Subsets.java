@@ -19,32 +19,64 @@
 */
 
 /*
-复杂度
-时间： NP 指数级 空间O(n)
-
-思路：回溯法
-N皇后模板 循环中递归处理子问题
-
-注意：
-这里我们对输入数组排序 只是为了AC leetcode 否则过不了 其实不用排序
+classic NP problem
 */
 
 public class Subsets {
-  public List<List<Integer>> subsets(int[] nums) {
-    List<List<Integer>> res = new ArrayList<List<Integer>>();
-    if (nums == null || nums.length == 0) return res;
-    Arrays.sort(nums);
-    helper(res, new ArrayList<Integer>(), nums, 0);
-    return res;	
-  }
-	
-  private void helper(List<List<Integer>> res, List<Integer> curList, int[] nums, int idx) {
-	  if (idx > nums.length) return;
-	  res.add(new ArrayList<Integer>(curList));
-  	for (int i = idx; i < nums.length; i++) {
-	    curList.add(nums[i]);
-	    helper(res, curList, nums, i+1);
-	    curList.remove(curList.size()-1);
-	  }
-  }
-} 
+    public List<List<Integer>> subsets(int[] nums) {
+        if (nums == null) {
+			return null;
+		}
+		Arrays.sort(nums);
+		return findSubSets(nums, nums.length-1);
+    }
+	private List<List<Integer>> findSubSets(int[] nums, int index) {
+		if (index == -1) {
+			List<List<Integer>> res = new ArrayList<List<Integer>>();
+			List<Intger> element = new ArrayList<Integer>();
+			res.add(element);
+			return res;
+		}
+		List<List<Integer>> res = findSubSets(nums, index-1);
+		int size = res.size();
+		for (int i = 0; i < size; i++) {
+			List<Integer> element = new ArrayList<Integer>(res.get(i));
+			element.add(nums[index]);
+			res.add(element);
+		}
+		return res;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

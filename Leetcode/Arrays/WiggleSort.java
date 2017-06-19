@@ -17,13 +17,13 @@ solution 1:
 public class WiggleSort {
   public void wiggleSort(int[] nums) {
     if(nums == null || nums.length == 0) return;
-	//first sort the array 
-	Arrays.sort(nums);
-	for (int i = 2; i < nums.length; i+=2) {
-	  int tmp = nums[i];
-	  nums[i] = nums[i-1];
-	  nums[i-1] = tmp;
-	}
+	  //first sort the array 
+	  Arrays.sort(nums);
+	  for (int i = 2; i < nums.length; i+=2) {
+	    int tmp = nums[i];
+	    nums[i] = nums[i-1];
+	    nums[i-1] = tmp;
+	  }
   }
 }
 
@@ -43,36 +43,15 @@ solution 2:
 public class WiggleSort {
   public void wiggleSort(int[] nums) {
     if(nums == null || nums.length == 0) return;
-	for (int i = 1; i < nums.length; i++) {
-	  // needs to swap when following conditions:
-	  // 1. nums[i] < nums[i-1] for odd i 
-	  // 2. nums[i] > nums[i-1] for even i
-	  if ((i%2 == 1 && nums[i] < nums[i-1]) || (i%2 == 0 nums[i] > nums[i-1])) {
+	  for (int i = 1; i < nums.length; i++) {
+	    // needs to swap when following conditions:
+	    // 1. nums[i] < nums[i-1] for odd i 
+	    // 2. nums[i] > nums[i-1] for even i
+	    if ((i%2 == 1 && nums[i] < nums[i-1]) || (i%2 == 0 && nums[i] > nums[i-1])) {
         int tmp = nums[i-1];
         nums[i-1] = nums[i];
         nums[i] = tmp;		
+	    }
 	  }
-	}
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -13,8 +13,8 @@
 time: O(n), space: O(n)
 */
 
-public class LongestSubstringWithAtMostTwoDistinctCharacters {
-  public int lengthOfLongestSubstringTwoDistinct(String s) {
+public class LongestSubstringWithAtMostKDistinctCharacters {
+  public int lengthOfLongestSubstringKDistinct(String s) {
     if(s == null || s.length() == 0) return 0;
 	  Map<Character, Integer> map = new HashMap<Character, Integer>();
 	  int left = 0;

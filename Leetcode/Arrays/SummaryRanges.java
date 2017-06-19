@@ -19,24 +19,27 @@ T(n) = O(n)
 */
 
 public class SummaryRanges {
-    public List<String> summaryRanges(int[] nums) {
-        List<String> res = new ArrayList<String>();
-		if (nums == null || nums.length == 0) {
-			return res;
-		}    
-		for (int i = 0; i < nums.length; i++) {
-			int front = nums[i];
-			String frontStr = Integer.toString(front);
-			while (i+1 < nums.length && nums[i+1] == nums[i]+1) {
-				i++;
-			}
-			if (nums[i] != front) {
-				res.add(frontStr + "->" + Integer.toString(nums[i]));
-			}
-			else {
-				res.add(frontStr);
-			}
-		}
-		return res;
+  public List<String> summaryRanges(int[] nums) {
+    List<String> res = new ArrayList<String>();
+    if (nums == null || nums.length == 0) {
+    	return res;
     }
+    
+    for (int i = 0; i < nums.length; i++) {
+    	int front = nums[i];
+    	String frontStr = Integer.toString(front);
+    	
+			while (i+1 < nums.length && nums[i+1] == nums[i]+1) {
+    		i++;
+    	}
+			
+    	if (nums[i] != front) {
+    		res.add(frontStr + "->" + Integer.toString(nums[i]));
+    	} else {
+    		res.add(frontStr);
+    	}
+			
+    }
+    return res;
+  }
 } 

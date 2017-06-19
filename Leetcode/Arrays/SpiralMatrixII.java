@@ -22,7 +22,7 @@
 
 public class SpiralMatrixII {
 	public int[][] generateMatrix(int n) {
-	    if (n < 0) {
+	   if (n < 0) {
 			return null;
 		}    		
 		int[][] res = new int[n][n];
