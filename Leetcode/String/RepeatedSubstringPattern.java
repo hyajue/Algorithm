@@ -49,4 +49,30 @@ public class RepeatedSubstringPattern {
 复杂度
 时间：O(n) 空间：O(n)
 
+思路： KMP
+利用kmp算法,构建next数组.
+如果满足下面两个条件则返回true:
+1. next[len] != 0: 最后一位的字符最起码要跟前面能构成前缀后缀子串
+2. next[len] % (len - next[len]) == 0: len - dp[len]是一个子字符串的长度，
+那么重复字符串的长度和肯定是一个子字符串的整数倍
 */
+
+
+public class RepeatedSubstringPattern {
+  public boolean repeatedSubstringPattern(String s) {
+    int i = 1;
+    int j = 0;
+    int len = s.length();
+    int[] next = new int[len+1];
+    while (i < len) {
+      if (s.charAt(i) == s.charAt(j)) {
+          next[++i] = ++j;
+      } else if (j == 0) {
+          ++i;
+      } else {
+          j = next[j];
+      }      
+    }
+    return next[len] != 0 && (next[len] % (len - next[len]) == 0);
+  }
+}
