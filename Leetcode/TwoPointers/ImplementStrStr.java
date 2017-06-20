@@ -37,3 +37,54 @@ public class ImplementStrStr {
 		return -1;
   }
 } 
+
+public int strStr(String haystack, String needle) {
+  if (haystack == null || needle == null || needle.length() == 0) {
+  	return 0;
+  }
+  
+	if (needle.length() > haystack.length()) {
+  	return -1;
+  }
+
+  int[] next = new int[needle.length()+1];  
+  getNext(needle, next);
+  int idx = 0;
+	for (int i = 0; i < haystack.length(); i++) {
+		while (idx < needle.length()) {
+			if (idx == 0 && needle.charAt(idx) != haystack.charAt(i)) {
+				break;
+			} else if (needle.charAt(idx) == haystack.charAt(i)) {
+				idx++;
+				break;
+			} else {
+				idx = next[idx-1];
+			}
+		}
+		if (idx == needle.length()) return true;
+	}
+  
+	 
+}
+
+private void getNext(String needle, int[] next) {
+	int i = 1;
+	int j = 0;
+	int len = needle.length();
+	while (i < len) {
+		if (needle.charAt(i) == needle.charAt(j)) {
+			next[++i] = ++j;
+		} else if (j == 0) {
+			i++;
+		} else {
+			j = next[j];
+		}
+	}
+}
+
+
+
+
+
+
+
