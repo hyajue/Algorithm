@@ -8,7 +8,16 @@
 * Given "abcd", return "dcbabcd".
 */
 
+/*
+复杂度
+时间：O(n) 空间：O(n)
 
+思路：kmp+反转拼接
+1.整体反转原字符串,设为revS，并将revS拼接到s之后,设整体字符串为comb
+2.对comb建立next数组
+3.根据next数组的性质,revS从最后一位向前数next[len(comb)]位,为公共的部分,所以不必要加到s前面
+4.将revS切除掉3中不必要的部分,拼接到s前面,返回
+*/
 
 public class ShortestPalindrome {
   public String shortestPalindrome(String s) {
@@ -17,10 +26,17 @@ public class ShortestPalindrome {
     String comb = s + "$" + revS;
     int len = comb.length();
 		int[] next = new int[len+1];
+		// call helper to contruct next array
 		getNext(comb, next);
-		int cutIdx = next[len];
-		String afterCut = revS.substring(0, curIdx);
+		int cutLen = next[len];
+		String afterCut = revS.substring(0, revS.length()-cutLen);
+		System.out.println(cutLen);
+		if (cutLen != s.length()) {
 		return afterCut + s;
+		} else {
+			// original s already a palindrome 
+		  return s; 
+		}
 		
   }
 	
