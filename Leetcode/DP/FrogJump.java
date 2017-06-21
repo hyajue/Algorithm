@@ -88,7 +88,7 @@ public class FrogJump {
 
 /*
 solution 2
-时间O() 空间O(n)
+时间O(n^2) 空间O(n)
 
 思路：我为人人型动态规划 
 维护一个map,键为stones[i],值为在stones[i]可能跳的步数 
