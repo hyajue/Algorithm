@@ -57,7 +57,6 @@ public class RepeatedSubstringPattern {
 那么重复字符串的长度和肯定是一个子字符串的整数倍
 */
 
-
 public class RepeatedSubstringPattern {
   public boolean repeatedSubstringPattern(String s) {
     int i = 1;
