@@ -39,7 +39,7 @@
 
 /*
 复杂度
-时间：O(4^n) 空间：O(n)
+时间：O(n*4^lenth(gene)) 空间：O(n)
 
 思路：bfs
 跟word ladder一样思路
@@ -55,7 +55,7 @@ public class MinimumGeneticMutation {
     for (String str : bank) {
       validGene.add(str);
     }
-		// end sequence must exsit in Set if valid
+		// end sequence must exist in Set if valid
     if (!validGene.contains(end)) return -1;
     // start point can be removed at first since it's valid anyway
 		if (validGene.contains(start)) validGene.remove(start);

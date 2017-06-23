@@ -93,6 +93,7 @@ public class WordLadderII {
 			Collections.reverse(path);
 			return;
 		}
+		
 		for (int i = 0; i < cur.length(); i++) {
 			char[] curArr = cur.toCharArray();
 			for (char c = 'a'; c <= 'z'; c++) {

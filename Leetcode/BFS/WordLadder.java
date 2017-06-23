@@ -45,34 +45,28 @@ public class WordLadder {
 		}
 		
     int level = 1;
-    int lastNum = 1;
-    int curNum = 0;
-    
     queue.offer(beginWord);
     isHave.add(beginWord);
     while (!queue.isEmpty()) {
-			String cur = queue.poll();
-			lastNum--;
-			for (int i = 0; i < cur.length(); i++) {
-				char[] curList = cur.toCharArray();
-				for (char c = 'a'; c <= 'z'; c++) {
-					curList[i] = c;
-					String tmp = new String(curList); 
-					if (dicts.contains(tmp) && !isHave.contains(tmp)) {
-					  if (tmp.equals(endWord)) {
-					  	return (level + 1);
-					  }
-					  queue.offer(tmp);
-					  isHave.add(tmp);
-					  curNum++;
-				  }
-				}
-			}
-			if (lastNum == 0) {
-			  lastNum = curNum;
-			  curNum = 0;
-			  level++;
-			}
+			int curSize = queue.size();
+			for (int k = 0; k < curSize; k++) {
+				String cur = queue.poll();
+			  for (int i = 0; i < cur.length(); i++) {
+			  	char[] curList = cur.toCharArray();
+			  	for (char c = 'a'; c <= 'z'; c++) {
+			  		curList[i] = c;
+			  		String tmp = new String(curList); 
+			  		if (dicts.contains(tmp) && !isHave.contains(tmp)) {
+			  		  if (tmp.equals(endWord)) {
+			  		  	return (level + 1);
+			  		  }
+			  		  queue.offer(tmp);
+			  		  isHave.add(tmp);
+			  	  }
+			  	}
+			  }
+      }
+			level++;
 		}
     return 0;		
 	}

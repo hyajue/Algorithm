@@ -50,38 +50,40 @@
 */
  
 public class PopulatingNextRightPointersInEachNode {
-    public void connect(TreeLinkNode root) {
-        if (root == null) {
-			return;
-		}
-		TreeLinkNode preHead = root;
-		TreeLinkNode pre = null;
-		TreeLinkNode curHead = null;
-		while (preHead != null) {
-			TreeLinkNode lastCur = preHead;
-			while (lastCur != null) {
-				if (lastCur.left != null) {
-					if (curHead == null) {
-						curHead = lastCur.left;
-						pre = curHead;
-					} else {
-						pre.next = lastCur.left;
-						pre = pre.next;
-					}
-				}
-				if (lastCur.right != null) {
-					if (curHead == null) {
-						curHead = lastCur.right;
-						pre = curHead;
-					} else {
-						pre.next = lastCur.right;
-						pre = pre.next;
-					}
-				}
-				lastCur = lastCur.next;
-			}
-			preHead = curHead;
-			curHead = null;
-		}
+  public void connect(TreeLinkNode root) {
+    if (root == null) {
+  	  return;
     }
+  
+	  TreeLinkNode preHead = root;
+    TreeLinkNode pre = null;
+    TreeLinkNode curHead = null;
+	 
+    while (preHead != null) {
+    	TreeLinkNode lastCur = preHead;
+    	while (lastCur != null) {
+    		if (lastCur.left != null) {
+    			if (curHead == null) {
+    				curHead = lastCur.left;
+    				pre = curHead;
+    			} else {
+    				pre.next = lastCur.left;
+    				pre = pre.next;
+    			}
+    		}
+    		if (lastCur.right != null) {
+    			if (curHead == null) {
+    				curHead = lastCur.right;
+    				pre = curHead;
+    			} else {
+    				pre.next = lastCur.right;
+    				pre = pre.next;
+    			}
+    		}
+    		lastCur = lastCur.next;
+    	}
+    	preHead = curHead;
+    	curHead = null;
+    }
+  }
 }

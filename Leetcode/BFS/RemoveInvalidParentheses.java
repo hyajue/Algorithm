@@ -45,47 +45,47 @@ public class RemoveInvalidParentheses {
     List<String> res = new ArrayList<String>();
     if (s == null) return res;
     
-	Set<String> visited = new HashSet<String>(); // keep tack of visited states
+	  Set<String> visited = new HashSet<String>(); // keep tack of visited states
     Queue<String> queue = new LinkedList<String>();
 
     queue.offer(s);
     visited.add(s);
     boolean found = false;
     while (!queue.isEmpty()) {
-	  s = queue.poll();
-	  
-	  if (isValid(s)) {
-	    // found one valid result, put it into res
-		res.add(s);
-		found = true;
-	  }
-	  if (found) continue;
-	  
-	  // generate every possible cadidates to check
-	  for(int i = 0; i < s.length(); i++) {
-		// only remove '(' or ')'
+	    s = queue.poll();
+	    
+	    if (isValid(s)) {
+	      // found one valid result, put it into res
+		    res.add(s);
+		    found = true;
+	    }
+	    if (found) continue;
+	    
+	    // generate every possible candidates to check
+	    for(int i = 0; i < s.length(); i++) {
+		    // only remove '(' or ')'
         if (s.charAt(i) != '(' && s.charAt(i) != ')') continue;		
-	    String t = s.substring(0, i) + s.substring(i+1);
-		if(!visited.contains(t)) { // for each unvisited state, add into queue
-		  queue.offer(t);
-		  visited.add(t);
-		}
+	      String t = s.substring(0, i) + s.substring(i+1);
+		    if(!visited.contains(t)) { // for each unvisited state, add into queue
+		      queue.offer(t);
+		      visited.add(t);
+		    }
+	    }
 	  }
-	}
-	return res;	
+	  return res;	
   }
   
-  // helper function to check if s contains valid parantheses
+  // helper function to check if s contains valid parentheses
    boolean isValid(String s) {
-      int cnt = 0; 
-      for (int i = 0; i < s.length(); i++) {
-        char c = s.charAt(i);
-        if (c == '(') cnt++;
-        if (c == ')') {
-		  if (cnt == 0) return false;
-		  cnt--;
-		}
-      }
-      return cnt == 0;
-    } 
+     int cnt = 0; 
+     for (int i = 0; i < s.length(); i++) {
+       char c = s.charAt(i);
+       if (c == '(') cnt++;
+       if (c == ')') {
+		    if (cnt == 0) return false;
+		    cnt--;
+		   }
+     }
+     return cnt == 0;
+   } 
 } 

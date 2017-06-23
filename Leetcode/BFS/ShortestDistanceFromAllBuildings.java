@@ -49,7 +49,7 @@ public class ShortestDistanceFromAllBuildings {
 				}
 			}
 		}
-    int minDist = Integer.MIN_VALUE;
+    int minDist = Integer.MAX_VALUE;
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				if (grid[i][j] == 0 && dist[i][j] != 0 && num[i][j] == buildingNum) {
@@ -78,7 +78,7 @@ public class ShortestDistanceFromAllBuildings {
 				for (int j = 0; j < dirs.length; j++) {
 					int x = corr[0] + dirs[j][0];
 					int y = corr[1] + dirs[j][1];
-					if (x >= 0 && y >= 0 && x < row && y < col && !visited[x][y] && grid[x][y] == 1) {
+					if (x >= 0 && y >= 0 && x < row && y < col && !visited[x][y] && grid[x][y] == 0) {
 						visited[x][y] = true;
 						dist[x][y] += level;
 						num[x][y]++;
