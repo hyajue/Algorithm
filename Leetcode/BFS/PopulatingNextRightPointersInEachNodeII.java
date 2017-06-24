@@ -39,34 +39,31 @@
 
 public class PopulatingNextRightPointersInEachNodeII {
   public void connect(TreeLinkNode root) {
-    if (root == null) return;
-	  TreeLinkNode curNode = root; // current level node
-	  TreeLinkNode nextLevelHead = null;  // next level head node
-	  TreeLinkNode prev = null;  // next level next node 
-	  while (curNode != null) {
-	    while (curNode != null) {
-		    if (curNode.left != null) {
-		      if (prev != null) {
-			      prev.next = curNode.left;  
-		      } else {
-			      nextLevelHead = curNode.left;
-		      }
-		      prev = curNode.left;	
-		    }
-		    if (curNode.right != null) {
-		      if (prev != null) {
-		        prev.next = curNode.right;  
-		      } else {
-			      nextLevelHead = curNode.right;
-		      }
-		      prev = curNode.right;
-		    }
-		    curNode = curNode.next;
-	    }
-	    // move to next level 
-	    curNode = nextLevelHead;
-	    nextLevelHead = null;
-	    prev = null;
-	  }
+    if(root == null) return;
+    //记录该层当前节点的指针，也叫做父节点，我们通过遍历父节点，来连接它们的子节点
+    TreeLinkNode p = root;
+    //记录下层第一个节点的指针
+    TreeLinkNode first = null;
+    while(p != null){
+      //当first为空时，说明刚跳转到新的一层，需要设置下一层的第一个节点了
+      if(first == null){
+          first = p.left;
+      }
+      //如果有左子节点，则其next是右子节点，如果没有，则遍历结束
+      //因为我们实际上是将下一层的节点用next指针连接，所以当遍历到叶子结点时已经没有下一层
+      if(p.left != null){
+          p.left.next = p.right; 
+      } else {
+          break;
+      }
+      //如果父节点有next，则next的左子节点是父节点的右子节点的next，如果没有，说明这层遍历完了，转入下一层
+      if(p.next != null){
+          p.right.next = p.next.left;
+          p = p.next;
+      } else {
+          p = first;
+          first = null;
+      }
+    }
   }
 }
