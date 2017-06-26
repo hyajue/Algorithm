@@ -26,9 +26,9 @@ public class VerifyPreorderSequenceInBinarySearchTree {
   public boolean  verifyPreorder(int[] preorder) {
     Stack<Integer> stack = new Stack<Integer>();
     if (preorder == null || preorder.length == 0) return true;
-    int low = Integer.MIN_VALUE;
+    int low = Integer.MAX_VALUE;
     for (int num : preorder) {
-      if (num < preorder) {
+      if (num < low) {
         return false;  
       }
       while (!stack.isEmpty() && num > stack.peek()) {
@@ -49,7 +49,7 @@ public class VerifyPreorderSequenceInBinarySearchTree {
 public class VerifyPreorderSequenceInBinarySearchTree {
   public boolean  verifyPreorder(int[] preorder) {
     if (preorder == null || preorder.length == 0) return true;
-    int low = Integer.MIN_VALUE;
+    int low = Integer.MAX_VALUE;
     int idx = -1;
     for (int num : preorder) {
       if (num < low) {

@@ -55,5 +55,19 @@ public class ValidateBinarySearchTree {
 	}
 }
 
+/*
+soution 2: recursion
+*/
 
- 
+public class ValidateBinarySearchTree {
+  public boolean isValidBST(ListNode root) {
+    return isValid(root, Integer.MAX_VALUE, Integer.MIN_VALUE);
+  }
+  
+  private boolean isValid(ListNode root, int max, int min) {
+    if (root == null) return true;
+    if (root.val >= max) return false;
+    if (root.val <= min) return false;
+    return isValid(root.left, root.val, min) && isValid(root.right, max, root.val);
+  }
+}

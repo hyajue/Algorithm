@@ -34,27 +34,31 @@
 */ 
   
 public class PathSumII {
-    public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-		if (root == null) {
-			return res;
-		}
-		List<Integer> items = new ArrayList<Integer>();
-		item.add(root.val);
-		helper(root, sum-root.val, items, res);
-		return res;
+  public List<List<Integer>> pathSum(TreeNode root, int sum) {
+    List<List<Integer>> res = new ArrayList<List<Integer>>();
+    if (root == null) {
+  	  return res;
     }
+    List<Integer> items = new ArrayList<Integer>();
+    item.add(root.val);
+    helper(root, sum-root.val, items, res);
+    return res;
+  }
+	
 	private void helper(TreeNode root, int sum, List<Integer> items, List<List<Integer>> res) {
 		if (root == null) return;
+		
 		if (root.left == null && root.right == null && sum == 0) {
 			res.add(new ArrayList<Integer>(items));
 			return;
 		}
+		
 		if (root.left != null) {
 			items.add(root.left.val);
 			helper(root.left, sum-root.left.val, items, res);
-			items.remove(items.size()-1); // backtracking remove the least recent added item if search fails
+			items.remove(items.size()-1); // backtracking remove the most recent added item if search fails
 		}
+		
 		if (root.right != null) {
 			items.add(root.right.val);
 			helper(root.right, sum-root.right.val, items, res);
