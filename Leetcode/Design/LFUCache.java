@@ -25,79 +25,131 @@
 
 /*
 复杂度
-时间：O(logN) 空间：O(n)
+时间：O(1) 空间O(n)
 
-思路：map + priority queue
-自定义数据结构Item,含属性key,value,frequency, and last used time,
-利用Item方便优先队列排序
-维护一个map,保存key—>Item,用来实现get.
-维护一个优先队列,当两个Item使用频率不等时,按频率从小到大排序;若使用频率相等,则按照上次使用时间从小到大排序
-每次需要选择哪个位置被覆盖时,直接从优先队列出队即可
+思路
+维护两个HashMap,一个存<Key, value>,用来get.一个存<Key,Node>,用来put
+定义一个数据结构freqNode,存同一个使用频率的所有key.内部用LinkedHashSet存储
+key的内容
 */
 
 public class LFUCache {
-  int size;
-	int capacity;
-	Map<Integer, Item> map;
-	PriorityQueue<Item> pq;
- 	
+  private int capacity;
+  private freqNode head;
+  Map<Integer, Integer> valMap;
+  Map<Integer, freqNode> freqMap;
+  
   public LFUCache(int capacity) {
-    this.size = 0;
     this.capacity = capacity;
-    this.map = new HashMap<Integer, Item>();
-    this.pq = new PriorityQueue<Item>(new Comparator<Item>() {
-		  public int compare(Item item1, Item item2) {
-				if (item1.freq != item2.freq) {
-					return item1.freq - item2.freq;
-				} else {
-					return item1.lastUsedTime - item2.lastUsedTime;
-				}
-			}
-		});    
+    this.head = null;
+    this.valMap = new HashMap<Integer, Integer>();
+    this.freqMap = new HashMap<Integer, freqNode>();			
   }
   
   public int get(int key) {
-    if (map.containsKey(key)) {
-		  Item prev = map.get(key);
-			pq.remove(prev);
-			prev.freq++;
-			prev.lastUsedTime++;
-			pq.offer(prev);
-			return map.get(key).val;	
-		} else {
-			return -1;
-		}    
+    if (valMap.containsKey(key)) {
+  		incCnt(key);
+  		return valMap.get(key);
+  	}
+    return -1;			
   }
   
   public void put(int key, int value) {
-    if (!map.containsKey(key) && size < capacity) {
-			Item cur = new Item(key, value, 0, 0);
-			map.put(key, cur);
-			pq.offer(cur);
-			size++;
-		} else if (!map.containsKey(key)){
-			Item top = pq.poll();
-			int keyTop = top.key;
-			map.remove(keyTop);
-			Item cur = new Item(key, value, 0, 0);
-			map.put(key, cur);
-			pq.offer(cur);
-		}    
+    if (capacity == 0) return;
+    if (valMap.containsKey(key)) {
+  		valMap.put(key, value);
+  		incCnt(key);
+  	} else {
+  		if (valMap.size() < capacity) {
+  		  valMap.put(key, value);
+  		  addToHead(key);
+  		} else {
+  		  removeOld();
+  		  valMap.put(key, value);
+  		  addToHead(key);
+  	  }
+  	}			
   }
-	
-	private class Item {
-		private int key;
-		private int val;
-		private int freq;
-		private int lastUsedTime;
-		
-		public Item(int key, int val, int freq, int lastUsedTime) {
-			this.key = key;
-			this.val = val;
-			this.freq = freq;
-			this.lastUsedTime = lastUsedTime;
-		}
-	}
+  
+  private void incCnt(int key) {
+  	freqNode node = freqMap.get(key);
+  	node.keys.remove(key);
+  	if (node.next == null) {
+  		node.next = new freqNode(node.count+1);
+  		node.next.prev = node;
+  		node.keys.add(key);
+  	} else if (node.next.count == node.count+1) {
+  		node.next.keys.add(key);
+  	} else {
+  		freqNode newNode = new freqNode(node.count+1);
+  		newNode.next = node.next;
+  		node.next.prev = newNode;
+  		newNode.prev = node;
+  		node.next = newNode;
+  		node.next.keys.add(key);
+  	}
+  	freqMap.put(key, node.next);
+  	if (node.keys.size() == 0) {
+  		remove(node);
+  	}
+  }
+  
+  private void remove(freqNode node) {
+  	if (node.next != null) {
+  		node.next.prev = node.prev;
+  	}
+  	if (node.prev != null) {
+  		node.prev.next = node.next;
+  	} 
+  	else { // node is head
+  		head = head.next;
+  	}
+  }
+  
+  private void addToHead(int key) {
+  	if (head == null) {
+  		head = new freqNode(1);
+  		head.keys.add(key);
+  	} else if (head.count == 1) {
+  		head.keys.add(key);
+  	} else {
+  		freqNode newHead = new freqNode(1);
+  		head.prev = newHead;
+  		newHead.next = head;
+  		head = newHead;
+  		head.keys.add(key);
+  	}
+  	freqMap.put(key, head);
+  }
+  
+  private void removeOld() {
+  	if (head == null) return;
+  	int old = 0;
+  	for (int key : head.keys) {
+  		old = key;
+  		break;
+  	}
+  	head.keys.remove(old);
+  	if (head.keys.size() == 0) {
+  		remove(head);
+  	}
+  	valMap.remove(old);
+  	freqMap.remove(old);
+  } 
+  
+  private class freqNode {
+  	int count; 
+  	freqNode prev;
+  	freqNode next;
+  	LinkedHashSet<Integer> keys;
+  	
+  	public freqNode(int freq) {
+  	  this.count = freq;
+  		this.keys = new LinkedHashSet<Integer>();
+  		this.prev = null;
+  		this.next = null;
+  	}
+  }
 }
 
 /**
@@ -105,4 +157,133 @@ public class LFUCache {
  * LFUCache obj = new LFUCache(capacity);
  * int param_1 = obj.get(key);
  * obj.put(key,value);
- */ 
+ */
+ 
+ 
+ 
+ 
+ public class LFUCache {
+    int cap;
+    ListNode head;
+    HashMap<Integer, Integer> valueMap;
+    HashMap<Integer, ListNode> nodeMap;
+
+    public LFUCache(int capacity) {
+        this.cap = capacity;
+        this.head = null;
+        this.valueMap = new HashMap<Integer, Integer>();
+        this.nodeMap = new HashMap<Integer, ListNode>();
+    }
+    
+    public int get(int key) {
+        if (valueMap.containsKey(key)) {
+            increaseCount(key);
+            return valueMap.get(key);
+        }
+        return -1;
+    }
+    
+    public void set(int key, int value) {
+        if (cap == 0) return;
+        if (valueMap.containsKey(key)) {
+            valueMap.put(key, value);
+            increaseCount(key);
+        }
+        else {
+            if (valueMap.size() < cap) {
+                valueMap.put(key, value);
+                addToHead(key);
+            }
+            else {
+                removeOld();
+                valueMap.put(key, value);
+                addToHead(key);
+            }
+        }
+
+    }
+    
+    public void increaseCount(int key) {
+        ListNode node = nodeMap.get(key);
+        node.keys.remove(key);
+        if (node.next == null) {
+            node.next = new ListNode(node.count+1);
+            node.next.prev = node;
+            node.next.keys.add(key);
+        }
+        else if (node.next.count == node.count + 1) {
+            node.next.keys.add(key);
+        }
+        else {
+            ListNode newNode = new ListNode(node.count+1);
+            newNode.next = node.next;
+            node.next.prev = newNode;
+            newNode.prev = node;
+            node.next = newNode;
+            node.next.keys.add(key);
+        }
+        nodeMap.put(key, node.next);
+        if (node.keys.size() == 0) remove(node);
+    }
+    
+    public void remove(ListNode node) {
+        if (node.next != null) {
+            node.next.prev = node.prev;
+        }
+        if (node.prev != null) {
+            node.prev.next = node.next;
+        }
+        else { // node is head
+            head = head.next;
+        }
+    }
+    
+    public void addToHead(int key) {
+        if (head == null) {
+            head = new ListNode(1);
+            head.keys.add(key);
+        }
+        else if (head.count == 1) {
+            head.keys.add(key);
+        }
+        else {
+            ListNode newHead = new ListNode(1);
+            head.prev = newHead;
+            newHead.next = head;
+            head = newHead;
+            head.keys.add(key);
+        }
+        nodeMap.put(key, head);
+    }
+    
+    public void removeOld() {
+        if (head == null) return;
+        int old = 0;
+        for (int keyInorder : head.keys) {
+            old = keyInorder;
+            break;
+        }
+        head.keys.remove(old);
+        if (head.keys.size() == 0) remove(head);
+        valueMap.remove(old);
+        nodeMap.remove(old);
+    }
+    
+    public class ListNode {
+        int count;
+        ListNode prev, next;
+        LinkedHashSet<Integer> keys;
+        public ListNode(int freq) {
+            count = freq;
+            keys = new LinkedHashSet<Integer>();
+            prev = next = null;
+        }
+    }
+}
+
+/**
+ * Your LFUCache object will be instantiated and called as such:
+ * LFUCache obj = new LFUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.set(key,value);
+ */
