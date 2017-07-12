@@ -26,7 +26,7 @@
 res[i][j]:unique path number at grid[i][j]
 sub-obtimal function:
 1. if gird[i][j] == 1: res[i][j] = 0
-2. else: res[i][j] = res[i][j-1] + res[i][j-1]
+2. else: res[i][j] = res[i][j-1] + res[i-1][j]
 res[0][0] = 1;
 */
 

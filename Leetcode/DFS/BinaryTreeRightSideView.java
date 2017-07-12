@@ -25,6 +25,7 @@
 由于每层只选择一个节点，所以优先访问右侧的节点。当List<Integet>的大小与层的深度一致时，说明已经加入了最右侧的节点，
 该层的其他节点无需再加入
 */
+
 public class BinaryTreeRightSideView {
   public List<Integer> rightSideView(TreeNode root) {
     List<Integer> res = new ArrayList<Integer>();

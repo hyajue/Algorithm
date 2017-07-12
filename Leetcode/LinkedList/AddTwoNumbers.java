@@ -27,7 +27,7 @@
  
 public class AddTwoNumbers {
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-		if (l1 == null && l2 && null) return null;
+		if (l1 == null && l2 == null) return null;
 		ListNode ptr1 = l1;
 		ListNode ptr2 = l2; 
 		ListNode dummy = new ListNode(0);
