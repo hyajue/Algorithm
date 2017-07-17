@@ -43,9 +43,3 @@ public class TrappingRainWater {
 		return maxVol;
 	}
 }
-
-/*
-solution 2
-
-*/
-

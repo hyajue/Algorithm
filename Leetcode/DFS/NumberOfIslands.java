@@ -24,24 +24,25 @@
 */
 
 public class NumberOfIslands {
-    public int numIslands(char[][] grid) {
-        if (grid == null || grid.length == 0 || grid[0].length == 0) {
-			return 0;
-		}
-		boolean[][] visited = new boolean[grid.length][grid[0].length];
-		int res = 0;
-		
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[0].length; j++) {
-				// if current position hasn't been visited and it's a island, then search
-				if (!visited[i][j] && grid[i][j] == '1') {
-					res++;
-					search(grid, visited, i, j);
-				}
-			}
-		}
-		return res;
-    }
+  public int numIslands(char[][] grid) {
+    if (grid == null || grid.length == 0 || grid[0].length == 0) {
+		  return 0;
+	  }
+	  boolean[][] visited = new boolean[grid.length][grid[0].length];
+	  int res = 0;
+	
+	  for (int i = 0; i < grid.length; i++) {
+		  for (int j = 0; j < grid[0].length; j++) {
+			  // if current position hasn't been visited and it's a island, then search
+			  if (!visited[i][j] && grid[i][j] == '1') {
+				  res++;
+				  search(grid, visited, i, j);
+			  }
+		  }
+	  }
+	  return res;
+  }
+	 
 	private void search(char[][] grid, boolean[][] visited, int row, int col) {
 		// check row, col valid; check current position is not visited and it's a '1'
 		if (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length && !visited[row][col] && grid[row][col] == '1') {
@@ -53,5 +54,3 @@ public class NumberOfIslands {
 		} 
 	}	
 }
-
- 

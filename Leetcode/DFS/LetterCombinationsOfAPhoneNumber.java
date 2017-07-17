@@ -43,7 +43,7 @@ public class LetterCombinationsOfAPhoneNumber {
   
 	private void helper(List<String> res, Map<Character, char[]> map, StringBuilder sb, String digits, int idx) {
     if (digits.length() == sb.length()) {
-	  res.add(sb.toString());
+	    res.add(sb.toString());
 			return;
 		}
 	  if (idx >= digits.length()) {
