@@ -35,3 +35,31 @@ public class FirstUniqueCharacterInAString {
     return -1;
   }
 } 
+
+
+//Method 2: Two Pointers One Pass
+public class Solution {
+    public int firstUniqChar(String s) {
+        if(s.length() == 0 || s == null) return -1;
+        int[] map = new int[26];
+        char[] cc = s.toCharArray();
+        int len = cc.length;
+        int fast = 1;
+        int slow = 0;
+        map[cc[slow] - 'a']++;
+        
+        while(fast < len){
+            map[cc[fast] - 'a']++;
+            // if slow pointer is not a unique character anymore, move to the next unique one
+            while(slow < len && map[cc[slow] - 'a'] > 1)
+                slow++;
+            // if(map[cc[slow] - 'a'] == 0){// not yet visited by the fast pointer
+            //     map[cc[slow] - 'a']++;
+            //     fast = slow;// reset the fast pointer
+            // }
+            fast++;
+        }
+        if(slow == len) return -1;
+        else return slow;
+    }
+}
